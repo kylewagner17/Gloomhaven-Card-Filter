@@ -35,23 +35,53 @@ namespace GHCardsApp
             SqlCommand command;
             SqlDataReader dataReader;
             String sql, Output = "";
+            //sql = "Select CardPicture from Gloomhaven_Cards";
             sql = "Select CardPicture from Gloomhaven_Cards";
             cnn.Open();
             command = new SqlCommand(sql, cnn);
 
-            dataReader = command.ExecuteReader();
+            /* dataReader = command.ExecuteReader();
 
-            while (dataReader.Read())
+             while (dataReader.Read())
             {
                 Output = Output + dataReader.GetValue(0);
             }
 
             MessageBox.Show(Output);
+            */
 
             //Possibly use sqlCredential for security relating to database
 
+            SqlDataAdapter da = new SqlDataAdapter(command);
+            DataSet ds = new DataSet();
+            da.Fill(ds, "Gloomhaven_Cards");
+            int c = ds.Tables["Gloomhaven_Cards"].Rows.Count;
+
+            //while i < ds.tables["gloomhaven_Cards"].rows.count;
+            //foreach row in table
+            //{Byte Array = new Byte array
+            //byte array = gloomhaven cards table . rows i-1 [card picture column]
+            //new memorystream(byte array)
+            //new picturebox = image.fromstream(memorystream)
+            //***********new placement for picturebox
+            //}
 
 
+
+            if (c > 0)
+            {
+                //BLOB is read into Byte array, then used to construct MemoryStream,
+                //then passed to PictureBox.
+                Byte[] byteBLOBData = new Byte[0];
+                byteBLOBData = (Byte[])(ds.Tables["Gloomhaven_Cards"].Rows[c - 1]["CardPicture"]);
+                MemoryStream stmBLOBData = new MemoryStream(byteBLOBData);
+                pictureBox1.Image = Image.FromStream(stmBLOBData);
+
+                //create new picture boxes using for loop and iterator ( "picturebox"+ToString(i) )
+                //cannot create variables within for loop but can add to an array instantiated before the loop
+
+            }
+            
 
 
 
@@ -65,17 +95,6 @@ namespace GHCardsApp
             cnn.Close();
         }
 
-        private static byte[] HexString2Bytes(string hexString)
-        {
-            int bytesCount = (hexString.Length) / 2;
-            byte[] bytes = new byte[bytesCount];
-            for (int x = 0; x < bytesCount; ++x)
-            {
-                bytes[x] = Convert.ToByte(hexString.Substring(x * 2, 2), 16);
-            }
-
-            return bytes;
-        }
 
     }
 }
