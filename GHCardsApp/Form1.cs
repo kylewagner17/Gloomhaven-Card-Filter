@@ -13,6 +13,13 @@ namespace GHCardsApp
 {
     public partial class Form1 : Form
     {
+        // Creating string containing information for connecting to sql server
+        // Server=localhost\SQLEXPRESS;Database=master;Trusted_Connection=True;
+        private string connectionString = @"Data Source=DESKTOP-QN510QT\SQLEXPRESS;Initial Catalog=""Gloomhaven Cards"";Integrated Security=True;Encrypt=False;Trusted_Connection=True;";
+        private string sql = "Select CardPicture from Gloomhaven_Cards";
+        private DataSet ds = new DataSet();
+        private Byte[] byteBLOBData = new Byte[0];
+
         public Form1()
         {
             InitializeComponent();
@@ -23,78 +30,123 @@ namespace GHCardsApp
 
         }
 
-        //Connection button handler
+
+
+        // Connection button handler
         private void button1_Click(object sender, EventArgs e)
         {
-            //Server=localhost\SQLEXPRESS;Database=master;Trusted_Connection=True;
-            //Creating string containing information for connecting to sql server
-            string connectionString;
-            connectionString = @"Data Source=DESKTOP-QN510QT\SQLEXPRESS;Initial Catalog=""Gloomhaven Cards"";Integrated Security=True;Encrypt=False;Trusted_Connection=True;";
-            SqlConnection cnn;
-            cnn = new SqlConnection(connectionString);
-            SqlCommand command;
-            SqlDataReader dataReader;
-            String sql, Output = "";
-            //sql = "Select CardPicture from Gloomhaven_Cards";
-            sql = "Select CardPicture from Gloomhaven_Cards";
-            cnn.Open();
-            command = new SqlCommand(sql, cnn);
+            searchBar();
 
-            /* dataReader = command.ExecuteReader();
+            SqlConnection cnn = new SqlConnection(connectionString);
 
-             while (dataReader.Read())
-            {
-                Output = Output + dataReader.GetValue(0);
-            }
+            ClearControls();
 
-            MessageBox.Show(Output);
-            */
+            GeneratePictureBoxes(query(sql, connectionString));
 
-            //Possibly use sqlCredential for security relating to database
-
-            SqlDataAdapter da = new SqlDataAdapter(command);
-            DataSet ds = new DataSet();
-            da.Fill(ds, "Gloomhaven_Cards");
-            int c = ds.Tables["Gloomhaven_Cards"].Rows.Count;
-
-            //while i < ds.tables["gloomhaven_Cards"].rows.count;
-            //foreach row in table
-            //{Byte Array = new Byte array
-            //byte array = gloomhaven cards table . rows i-1 [card picture column]
-            //new memorystream(byte array)
-            //new picturebox = image.fromstream(memorystream)
-            //***********new placement for picturebox
-            //}
-
-
-
-            if (c > 0)
-            {
-                //BLOB is read into Byte array, then used to construct MemoryStream,
-                //then passed to PictureBox.
-                Byte[] byteBLOBData = new Byte[0];
-                byteBLOBData = (Byte[])(ds.Tables["Gloomhaven_Cards"].Rows[c - 1]["CardPicture"]);
-                MemoryStream stmBLOBData = new MemoryStream(byteBLOBData);
-                pictureBox1.Image = Image.FromStream(stmBLOBData);
-
-                //create new picture boxes using for loop and iterator ( "picturebox"+ToString(i) )
-                //cannot create variables within for loop but can add to an array instantiated before the loop
-
-            }
-            
-
-
-
-
-
-            //Opens sql connection using property settings of SqlConnection
-
-            MessageBox.Show("Connection Open!");
-
-            //Closes sql connection
+            // Closes sql connection
             cnn.Close();
         }
 
+        //Saves search input into string to pass to sql query
+        private void searchBar()
+        {
+            sql = "Select CardPicture from Gloomhaven_Cards";
+
+            if (textBox1.Text != "")
+            {
+                sql = sql + " WHERE TopText LIKE '%" + textBox1.Text + "%'";
+            }
+        }
+
+        // Function for querying the sql database and filling a dataset
+        private DataSet query(String sqlQuery, String sqlConnectionString)
+        {
+            ds = new DataSet();
+            SqlConnection cnn = new SqlConnection(sqlConnectionString);
+            SqlCommand command = new SqlCommand(sqlQuery, cnn);
+            SqlDataAdapter da = new SqlDataAdapter(command);
+            da.Fill(ds, "Gloomhaven_Cards");
+            return ds;
+        }
+
+        // Function for dynamicaly creating pictureboxes and the table that holds them
+        private void GeneratePictureBoxes(DataSet QueryResult)
+        {
+            
+            int numCols = 4; // Number of columns
+
+            // Create table for picturebox spacing
+            TableLayoutPanel tableLayoutPanel1 = new TableLayoutPanel();
+            tableLayoutPanel1.AutoSize = true;
+            tableLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.None; // Anchor to the top center
+            tableLayoutPanel1.ColumnStyles.Clear();
+            tableLayoutPanel1.RowStyles.Clear();
+
+            // Allows for dynamic row creation based on card count pulled from database
+            int numRows = (int)Math.Ceiling((double)QueryResult.Tables["Gloomhaven_Cards"].Rows.Count / numCols);
+
+            // Define columns and rows with sizes to autofit pictureboxes
+            for (int i = 0; i < numCols; i++)
+            {
+                tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize, 100f / numCols));
+            }
+
+            for (int i = 0; i < numRows; i++)
+            {
+                tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.AutoSize, 100f / numRows));
+            }
+
+            // Add PictureBoxes to the TableLayoutPanel
+            int pictureIndex = 0;
+            for (int row = 0; row < numRows; row++)
+            {
+                for (int col = 0; col < numCols; col++)
+                {
+                    if (pictureIndex < QueryResult.Tables["Gloomhaven_Cards"].Rows.Count)
+                    {
+                        byteBLOBData = (Byte[])(QueryResult.Tables["Gloomhaven_Cards"].Rows[pictureIndex]["CardPicture"]);
+
+                        // Memorystream disposal via using block 
+                        using (MemoryStream stmBLOBData = new MemoryStream(byteBLOBData))
+                        {
+                            PictureBox pictureBox = new PictureBox();
+                            pictureBox.Visible = false; 
+                            pictureBox.Image = Image.FromStream(stmBLOBData); // Set image source
+                            pictureBox.Size = new Size(200, 300);
+                            pictureBox.SizeMode = PictureBoxSizeMode.Zoom; 
+                            tableLayoutPanel1.Controls.Add(pictureBox, col, row);
+                            pictureBox.Visible = true;
+                        }
+                        pictureIndex++;
+                    }
+                    else
+                    {
+                        // If there are no more pictures, break the loop
+                        break;
+                    }
+                }
+            }
+
+            // Add TableLayoutPanel to the form
+            Controls.Add(tableLayoutPanel1);
+
+            // Adjust the location of the TableLayoutPanel to center it horizontally
+            tableLayoutPanel1.Location = new Point((ClientSize.Width - tableLayoutPanel1.Width) / 2, 0);
+
+
+        }
+
+        private void ClearControls()
+        {
+            // Remove all controls except the TextBox (textBox1)
+            for (int i = Controls.Count - 1; i >= 0; i--)
+            {
+                if (Controls[i] != textBox1 && Controls[i] != button1)
+                {
+                    Controls.RemoveAt(i);
+                }
+            }
+        }
 
     }
 }
