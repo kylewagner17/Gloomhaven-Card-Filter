@@ -21,7 +21,7 @@ namespace GHCardsApp
         private Byte[] byteBLOBData = new Byte[0];
 
         public Form1()
-        {
+        {      
             InitializeComponent();
         }
 
@@ -29,7 +29,7 @@ namespace GHCardsApp
         {
 
         }
-
+        //agag
 
 
         // Connection button handler
