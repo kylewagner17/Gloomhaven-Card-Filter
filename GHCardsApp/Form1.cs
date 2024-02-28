@@ -29,7 +29,6 @@ namespace GHCardsApp
         {
 
         }
-        //agag
 
 
         // Connection button handler
@@ -54,7 +53,7 @@ namespace GHCardsApp
 
             if (textBox1.Text != "")
             {
-                sql = sql + " WHERE TopText LIKE '%" + textBox1.Text + "%'";
+                sql = sql + " WHERE TopText LIKE '%" + textBox1.Text + "%' OR BotText LIKE '%" + textBox1.Text + "%'";
             }
         }
 
