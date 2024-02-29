@@ -16,12 +16,12 @@ namespace GHCardsApp
         // Creating string containing information for connecting to sql server
         // Server=localhost\SQLEXPRESS;Database=master;Trusted_Connection=True;
         private string connectionString = @"Data Source=DESKTOP-QN510QT\SQLEXPRESS;Initial Catalog=""Gloomhaven Cards"";Integrated Security=True;Encrypt=False;Trusted_Connection=True;";
-        private string sql = "Select CardPicture from Gloomhaven_Cards";
+        private string sql = "SELECT CardPicture FROM Gloomhaven_Cards";
         private DataSet ds = new DataSet();
         private Byte[] byteBLOBData = new Byte[0];
 
         public Form1()
-        {      
+        {
             InitializeComponent();
         }
 
@@ -34,11 +34,13 @@ namespace GHCardsApp
         // Connection button handler
         private void button1_Click(object sender, EventArgs e)
         {
+            ClearControls();
+
             searchBar();
 
             SqlConnection cnn = new SqlConnection(connectionString);
 
-            ClearControls();
+            
 
             GeneratePictureBoxes(query(sql, connectionString));
 
@@ -49,11 +51,11 @@ namespace GHCardsApp
         //Saves search input into string to pass to sql query
         private void searchBar()
         {
-            sql = "Select CardPicture from Gloomhaven_Cards";
+            sql = "SELECT CardPicture FROM Gloomhaven_Cards WHERE CardLevel <= " + trackBar1.Value + " ";
 
             if (textBox1.Text != "")
             {
-                sql = sql + " WHERE TopText LIKE '%" + textBox1.Text + "%' OR BotText LIKE '%" + textBox1.Text + "%'";
+                sql = sql + " AND (TopText LIKE '%" + textBox1.Text + "%' OR BotText LIKE '%" + textBox1.Text + "%')";
             }
         }
 
@@ -71,7 +73,7 @@ namespace GHCardsApp
         // Function for dynamicaly creating pictureboxes and the table that holds them
         private void GeneratePictureBoxes(DataSet QueryResult)
         {
-            
+
             int numCols = 4; // Number of columns
 
             // Create table for picturebox spacing
@@ -109,10 +111,10 @@ namespace GHCardsApp
                         using (MemoryStream stmBLOBData = new MemoryStream(byteBLOBData))
                         {
                             PictureBox pictureBox = new PictureBox();
-                            pictureBox.Visible = false; 
+                            pictureBox.Visible = false;
                             pictureBox.Image = Image.FromStream(stmBLOBData); // Set image source
                             pictureBox.Size = new Size(200, 300);
-                            pictureBox.SizeMode = PictureBoxSizeMode.Zoom; 
+                            pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
                             tableLayoutPanel1.Controls.Add(pictureBox, col, row);
                             pictureBox.Visible = true;
                         }
@@ -140,12 +142,26 @@ namespace GHCardsApp
             // Remove all controls except the TextBox (textBox1)
             for (int i = Controls.Count - 1; i >= 0; i--)
             {
-                if (Controls[i] != textBox1 && Controls[i] != button1)
+                if (Controls[i] != button1 && Controls[i] != textBox1 && Controls[i] != trackBar1 && Controls[i] != checkBox1 && Controls[i] != trackBarText)
                 {
                     Controls.RemoveAt(i);
                 }
             }
         }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            sql = "SELECT CardPicture FROM Gloomhaven_Cards WHERE CardLevel <= " + trackBar1.Value + " ";
+            trackBarText.Text = "Level: " + trackBar1.Value;
+
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
 
     }
 }
