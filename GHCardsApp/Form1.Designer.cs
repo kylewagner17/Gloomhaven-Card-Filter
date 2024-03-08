@@ -30,11 +30,13 @@ namespace GHCardsApp
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             button1 = new Button();
             textBox1 = new TextBox();
             trackBar1 = new TrackBar();
-            checkBox1 = new CheckBox();
             trackBarText = new TextBox();
+            radioButton1 = new RadioButton();
+            radioButton2 = new RadioButton();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             SuspendLayout();
             // 
@@ -62,6 +64,7 @@ namespace GHCardsApp
             // trackBar1
             // 
             trackBar1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            trackBar1.BackColor = SystemColors.Window;
             trackBar1.Location = new Point(928, 76);
             trackBar1.Maximum = 9;
             trackBar1.Minimum = 1;
@@ -72,30 +75,10 @@ namespace GHCardsApp
             trackBar1.Value = 1;
             trackBar1.Scroll += trackBar1_Scroll;
             // 
-            // checkBox1
-            // 
-            checkBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            checkBox1.Appearance = Appearance.Button;
-            checkBox1.AutoSize = true;
-            checkBox1.BackgroundImage = Properties.Resources.BR;
-            checkBox1.BackgroundImageLayout = ImageLayout.Zoom;
-            checkBox1.CheckAlign = ContentAlignment.MiddleCenter;
-            checkBox1.Checked = true;
-            checkBox1.CheckState = CheckState.Checked;
-            checkBox1.ForeColor = SystemColors.ControlText;
-            checkBox1.Location = new Point(928, 127);
-            checkBox1.MaximumSize = new Size(50, 50);
-            checkBox1.MinimumSize = new Size(40, 40);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(40, 40);
-            checkBox1.TabIndex = 3;
-            checkBox1.TextAlign = ContentAlignment.MiddleCenter;
-            checkBox1.UseVisualStyleBackColor = true;
-            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
-            // 
             // trackBarText
             // 
             trackBarText.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            trackBarText.BackColor = SystemColors.Window;
             trackBarText.BorderStyle = BorderStyle.None;
             trackBarText.Font = new Font("Roboto", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             trackBarText.Location = new Point(989, 50);
@@ -106,15 +89,49 @@ namespace GHCardsApp
             trackBarText.TabIndex = 4;
             trackBarText.Text = "Level: 1";
             // 
+            // radioButton1
+            // 
+            radioButton1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            radioButton1.Appearance = Appearance.Button;
+            radioButton1.BackgroundImage = Properties.Resources.BR;
+            radioButton1.BackgroundImageLayout = ImageLayout.Zoom;
+            radioButton1.Checked = true;
+            radioButton1.Location = new Point(1069, 127);
+            radioButton1.Name = "radioButton1";
+            radioButton1.Size = new Size(40, 40);
+            radioButton1.TabIndex = 5;
+            radioButton1.TabStop = true;
+            radioButton1.TextAlign = ContentAlignment.MiddleCenter;
+            radioButton1.TextImageRelation = TextImageRelation.ImageAboveText;
+            radioButton1.UseVisualStyleBackColor = true;
+            radioButton1.CheckedChanged += radioButtton_CheckedChanged;
+            // 
+            // radioButton2
+            // 
+            radioButton2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            radioButton2.Appearance = Appearance.Button;
+            radioButton2.BackgroundImage = (Image)resources.GetObject("radioButton2.BackgroundImage");
+            radioButton2.BackgroundImageLayout = ImageLayout.Zoom;
+            radioButton2.Location = new Point(1069, 173);
+            radioButton2.Name = "radioButton2";
+            radioButton2.Size = new Size(40, 40);
+            radioButton2.TabIndex = 6;
+            radioButton2.TextAlign = ContentAlignment.MiddleCenter;
+            radioButton2.TextImageRelation = TextImageRelation.ImageAboveText;
+            radioButton2.UseVisualStyleBackColor = true;
+            radioButton2.CheckedChanged += radioButtton_CheckedChanged;
+            // 
             // Form1
             // 
             AcceptButton = button1;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
+            BackColor = SystemColors.Window;
             ClientSize = new Size(1121, 657);
+            Controls.Add(radioButton2);
+            Controls.Add(radioButton1);
             Controls.Add(trackBarText);
-            Controls.Add(checkBox1);
             Controls.Add(trackBar1);
             Controls.Add(textBox1);
             Controls.Add(button1);
@@ -125,12 +142,18 @@ namespace GHCardsApp
             PerformLayout();
         }
 
+        private void RadioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         private Button button1;
         private TextBox textBox1;
         private TrackBar trackBar1;
-        private CheckBox checkBox1;
         private TextBox trackBarText;
+        private RadioButton radioButton1;
+        private RadioButton radioButton2;
     }
 }
