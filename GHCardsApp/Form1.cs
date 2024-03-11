@@ -19,15 +19,20 @@ namespace GHCardsApp
         private string sql = "SELECT CardPicture FROM Gloomhaven_Cards";
         private DataSet ds = new DataSet();
         private Byte[] byteBLOBData = new Byte[0];
+        private enum CardClass { Brute , Tinkerer, Spellweaver, Scoundrel, Cragheart, Mindthief, Sunkeeper, Quartermaster, Summoner, 
+                                Nightshroud, Plagueherald, Berserker, Soothsinger, Doomstalker, Sawbones, Elementalist, Beast_Tyrant};
+
+        private CardClass selectedOption = CardClass.Brute;
 
         public Form1()
         {
             InitializeComponent();
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+          
         }
 
         // Main Function 
@@ -35,8 +40,7 @@ namespace GHCardsApp
         {
             
             searchBar();
-            classRadioButton();
-
+            classRadioButton(selectedOption);
             GeneratePictureBoxes(query(sql, connectionString));
         }
 
@@ -149,28 +153,82 @@ namespace GHCardsApp
             sql = "SELECT CardPicture FROM Gloomhaven_Cards WHERE CardLevel <= " + trackBar1.Value + " ";
 
             trackBarText.Text = "Level: " + trackBar1.Value;
-            classRadioButton();
+            classRadioButton(selectedOption);
             GeneratePictureBoxes(query(sql, connectionString));
         }
 
-        private void classRadioButton()
+        private void classRadioButton(CardClass cardClass)
 
         {
-            if (radioButton1.Checked)
+            switch (cardClass)
             {
-                sql = sql + " AND ClassName = 'Brute' ";
+                case CardClass.Brute:
+                    sql = sql + " AND ClassName = 'Brute' ";
+                    break;
+                case CardClass.Tinkerer:
+                    sql = sql + " AND ClassName = 'Tinkerer' ";
+                    break;
+                //case CardClass.Spellweaver:
+                //sql = sql + " AND ClassName = 'Spellweaver' ";
+                //break;
+                //case CardClass.Scoundrel:
+                //sql = sql + " AND ClassName = 'Scoundrel' ";
+                //break;
+                //case CardClass.Cragheart:
+                //sql = sql + " AND ClassName = 'Cragheart' ";
+                //break;
+                //case CardClass.Mindthief:
+                //sql = sql + " AND ClassName = 'Mindthief' ";
+                //break;
+                //case CardClass.Sunkeeper:
+                //sql = sql + " AND ClassName = 'Sunkeeper' ";
+                //break;
+                //case CardClass.Quartermaster:
+                //sql = sql + " AND ClassName = 'Quartermaster' ";
+                //break;
+                //case CardClass.Summoner:
+                //sql = sql + " AND ClassName = 'Summoner' ";
+                //break;
+                //case CardClass.Nightshroud:
+                //sql = sql + " AND ClassName = 'Nightshroud' ";
+                //break;
+                //case CardClass.Plagueherald:
+                //sql = sql + " AND ClassName = 'Plagueherald' ";
+                //break;
+                //case CardClass.Berserker:
+                //sql = sql + " AND ClassName = 'Berserker' ";
+                //break;
+                //case CardClass.Soothsinger:
+                //sql = sql + " AND ClassName = 'Soothsinger' ";
+                //break;
+                //case CardClass.Doomstalker:
+                //sql = sql + " AND ClassName = 'Doomstalker' ";
+                //break;
+                //case CardClass.Elementalist:
+                //sql = sql + " AND ClassName = 'Elementalist' ";
+                //break;
+                //case CardClass.Sawbones:
+                //sql = sql + " AND ClassName = 'Sawbones' ";
+                //break;
+                //case CardClass.Beast_Tyrant:
+                //sql = sql + " AND ClassName = 'Beast_Tyrant' ";
+                //break;
+                default:
+                    break;
             }
-
-            else if (radioButton2.Checked)
-            {
-                sql = sql + " AND ClassName = 'Tinkerer' ";
-            }
-                
         }
 
         void radioButtton_CheckedChanged(object sender, EventArgs e)
         {
-            button1_Click(sender, e);
+            
+            RadioButton radioButton = sender as RadioButton;
+            if (radioButton != null && radioButton.Checked && radioButton.Tag != null)
+            {
+                selectedOption = (CardClass)radioButton.Tag;
+                searchBar();
+                classRadioButton(selectedOption);
+                GeneratePictureBoxes(query(sql, connectionString));
+            }
         }
 
     }

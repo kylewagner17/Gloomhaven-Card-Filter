@@ -105,6 +105,7 @@ namespace GHCardsApp
             radioButton1.TextImageRelation = TextImageRelation.ImageAboveText;
             radioButton1.UseVisualStyleBackColor = true;
             radioButton1.CheckedChanged += radioButtton_CheckedChanged;
+            radioButton1.Tag = CardClass.Brute;
             // 
             // radioButton2
             // 
@@ -120,6 +121,7 @@ namespace GHCardsApp
             radioButton2.TextImageRelation = TextImageRelation.ImageAboveText;
             radioButton2.UseVisualStyleBackColor = true;
             radioButton2.CheckedChanged += radioButtton_CheckedChanged;
+            radioButton2.Tag = CardClass.Tinkerer; 
             // 
             // Form1
             // 
