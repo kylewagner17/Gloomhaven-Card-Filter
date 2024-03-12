@@ -27,7 +27,10 @@ namespace GHCardsApp
         public Form1()
         {
             InitializeComponent();
-            
+            //sql += " Where ClassName = 'Scoundrel'";
+            searchBar();
+            classRadioButton(selectedOption);
+            GeneratePictureBoxes(query(sql, connectionString));
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -133,18 +136,7 @@ namespace GHCardsApp
             tableLayoutPanel1.Location = new Point((ClientSize.Width - tableLayoutPanel1.Width) / 2, 0);
         }
 
-        private void ClearControls()
-        {
-            // Remove TableLayoutPanel and pictureboxes
-            for (int i = Controls.Count - 1; i >= 0; i--)
-            {
-                if (Controls[i] != button1 && Controls[i] != textBox1 && Controls[i] != trackBar1 
-                   && Controls[i] != trackBarText && Controls[i] != radioButton1 && Controls[i] != radioButton2)
-                {
-                    Controls.RemoveAt(i);
-                }
-            }
-        }
+        
 
         // Adjust sql query to account for level of cards searched for
         private void trackBar1_Scroll(object sender, EventArgs e)
@@ -168,12 +160,12 @@ namespace GHCardsApp
                 case CardClass.Tinkerer:
                     sql = sql + " AND ClassName = 'Tinkerer' ";
                     break;
-                //case CardClass.Spellweaver:
-                //sql = sql + " AND ClassName = 'Spellweaver' ";
-                //break;
-                //case CardClass.Scoundrel:
-                //sql = sql + " AND ClassName = 'Scoundrel' ";
-                //break;
+                case CardClass.Spellweaver:
+                sql = sql + " AND ClassName = 'Spellweaver' ";
+                break;
+                case CardClass.Scoundrel:
+                sql = sql + " AND ClassName = 'Scoundrel' ";
+                break;
                 //case CardClass.Cragheart:
                 //sql = sql + " AND ClassName = 'Cragheart' ";
                 //break;

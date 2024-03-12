@@ -37,6 +37,8 @@ namespace GHCardsApp
             trackBarText = new TextBox();
             radioButton1 = new RadioButton();
             radioButton2 = new RadioButton();
+            radioButton3 = new RadioButton();
+            radioButton4 = new RadioButton();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             SuspendLayout();
             // 
@@ -101,11 +103,11 @@ namespace GHCardsApp
             radioButton1.Size = new Size(40, 40);
             radioButton1.TabIndex = 5;
             radioButton1.TabStop = true;
+            radioButton1.Tag = CardClass.Brute;
             radioButton1.TextAlign = ContentAlignment.MiddleCenter;
             radioButton1.TextImageRelation = TextImageRelation.ImageAboveText;
             radioButton1.UseVisualStyleBackColor = true;
             radioButton1.CheckedChanged += radioButtton_CheckedChanged;
-            radioButton1.Tag = CardClass.Brute;
             // 
             // radioButton2
             // 
@@ -117,11 +119,43 @@ namespace GHCardsApp
             radioButton2.Name = "radioButton2";
             radioButton2.Size = new Size(40, 40);
             radioButton2.TabIndex = 6;
+            radioButton2.Tag = CardClass.Tinkerer;
             radioButton2.TextAlign = ContentAlignment.MiddleCenter;
             radioButton2.TextImageRelation = TextImageRelation.ImageAboveText;
             radioButton2.UseVisualStyleBackColor = true;
             radioButton2.CheckedChanged += radioButtton_CheckedChanged;
-            radioButton2.Tag = CardClass.Tinkerer; 
+            // 
+            // radioButton3
+            // 
+            radioButton3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            radioButton3.Appearance = Appearance.Button;
+            radioButton3.BackgroundImage = Properties.Resources.SW;
+            radioButton3.BackgroundImageLayout = ImageLayout.Zoom;
+            radioButton3.Location = new Point(1069, 219);
+            radioButton3.Name = "radioButton3";
+            radioButton3.Size = new Size(40, 40);
+            radioButton3.TabIndex = 7;
+            radioButton3.Tag = CardClass.Spellweaver;
+            radioButton3.TextAlign = ContentAlignment.MiddleCenter;
+            radioButton3.TextImageRelation = TextImageRelation.ImageAboveText;
+            radioButton3.UseVisualStyleBackColor = true;
+            radioButton3.CheckedChanged += radioButtton_CheckedChanged;
+            // 
+            // radioButton4
+            // 
+            radioButton4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            radioButton4.Appearance = Appearance.Button;
+            radioButton4.BackgroundImage = Properties.Resources.SC;
+            radioButton4.BackgroundImageLayout = ImageLayout.Zoom;
+            radioButton4.Location = new Point(1069, 265);
+            radioButton4.Name = "radioButton4";
+            radioButton4.Size = new Size(40, 40);
+            radioButton4.TabIndex = 8;
+            radioButton4.Tag = CardClass.Scoundrel;
+            radioButton4.TextAlign = ContentAlignment.MiddleCenter;
+            radioButton4.TextImageRelation = TextImageRelation.ImageAboveText;
+            radioButton4.UseVisualStyleBackColor = true;
+            radioButton4.CheckedChanged += radioButtton_CheckedChanged;
             // 
             // Form1
             // 
@@ -131,6 +165,8 @@ namespace GHCardsApp
             AutoScroll = true;
             BackColor = SystemColors.Window;
             ClientSize = new Size(1121, 657);
+            Controls.Add(radioButton4);
+            Controls.Add(radioButton3);
             Controls.Add(radioButton2);
             Controls.Add(radioButton1);
             Controls.Add(trackBarText);
@@ -142,6 +178,20 @@ namespace GHCardsApp
             ((System.ComponentModel.ISupportInitialize)trackBar1).EndInit();
             ResumeLayout(false);
             PerformLayout();
+        }
+
+        private void ClearControls()
+        {
+            // Remove TableLayoutPanel and pictureboxes
+            for (int i = Controls.Count - 1; i >= 0; i--)
+            {
+                if (Controls[i] != button1 && Controls[i] != textBox1 && Controls[i] != trackBar1
+                   && Controls[i] != trackBarText && Controls[i] != radioButton1 && Controls[i] != radioButton2
+                   && Controls[i] != radioButton3 && Controls[i] != radioButton4)
+                {
+                    Controls.RemoveAt(i);
+                }
+            }
         }
 
         private void RadioButton2_CheckedChanged(object sender, EventArgs e)
@@ -157,5 +207,7 @@ namespace GHCardsApp
         private TextBox trackBarText;
         private RadioButton radioButton1;
         private RadioButton radioButton2;
+        private RadioButton radioButton3;
+        private RadioButton radioButton4;
     }
 }
