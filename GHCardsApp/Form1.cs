@@ -19,8 +19,11 @@ namespace GHCardsApp
         private string sql = "SELECT CardPicture FROM Gloomhaven_Cards";
         private DataSet ds = new DataSet();
         private Byte[] byteBLOBData = new Byte[0];
-        private enum CardClass { Brute , Tinkerer, Spellweaver, Scoundrel, Cragheart, Mindthief, Sunkeeper, Quartermaster, Summoner, 
-                                Nightshroud, Plagueherald, Berserker, Soothsinger, Doomstalker, Sawbones, Elementalist, Beast_Tyrant};
+        private enum CardClass
+        {
+            Brute, Tinkerer, Spellweaver, Scoundrel, Cragheart, Mindthief, Sunkeeper, Quartermaster, Summoner,
+            Nightshroud, Plagueherald, Berserker, Soothsinger, Doomstalker, Sawbones, Elementalist, Beast_Tyrant, Diviner, Bladeswarm
+        };
 
         private CardClass selectedOption = CardClass.Brute;
 
@@ -29,21 +32,21 @@ namespace GHCardsApp
             InitializeComponent();
             //sql += " Where ClassName = 'Scoundrel'";
             searchBar();
-            classRadioButton(selectedOption);
+            classSwitch(selectedOption);
             GeneratePictureBoxes(query(sql, connectionString));
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-          
+
         }
 
         // Main Function 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+
             searchBar();
-            classRadioButton(selectedOption);
+            classSwitch(selectedOption);
             GeneratePictureBoxes(query(sql, connectionString));
         }
 
@@ -114,7 +117,7 @@ namespace GHCardsApp
                             PictureBox pictureBox = new PictureBox();
                             pictureBox.Visible = false;
                             pictureBox.Image = Image.FromStream(stmBLOBData); // Set image source
-                            pictureBox.Size = new Size(200, 300);
+                            pictureBox.Size = new Size(250, 375);
                             pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
                             tableLayoutPanel1.Controls.Add(pictureBox, col, row);
                             pictureBox.Visible = true;
@@ -136,20 +139,18 @@ namespace GHCardsApp
             tableLayoutPanel1.Location = new Point((ClientSize.Width - tableLayoutPanel1.Width) / 2, 0);
         }
 
-        
-
         // Adjust sql query to account for level of cards searched for
         private void trackBar1_Scroll(object sender, EventArgs e)
-        { 
+        {
 
             sql = "SELECT CardPicture FROM Gloomhaven_Cards WHERE CardLevel <= " + trackBar1.Value + " ";
 
             trackBarText.Text = "Level: " + trackBar1.Value;
-            classRadioButton(selectedOption);
+            classSwitch(selectedOption);
             GeneratePictureBoxes(query(sql, connectionString));
         }
 
-        private void classRadioButton(CardClass cardClass)
+        private void classSwitch(CardClass cardClass)
 
         {
             switch (cardClass)
@@ -161,50 +162,56 @@ namespace GHCardsApp
                     sql = sql + " AND ClassName = 'Tinkerer' ";
                     break;
                 case CardClass.Spellweaver:
-                sql = sql + " AND ClassName = 'Spellweaver' ";
-                break;
+                    sql = sql + " AND ClassName = 'Spellweaver' ";
+                    break;
                 case CardClass.Scoundrel:
-                sql = sql + " AND ClassName = 'Scoundrel' ";
+                    sql = sql + " AND ClassName = 'Scoundrel' ";
+                    break;
+                case CardClass.Cragheart:
+                sql = sql + " AND ClassName = 'Cragheart' ";
                 break;
-                //case CardClass.Cragheart:
-                //sql = sql + " AND ClassName = 'Cragheart' ";
-                //break;
-                //case CardClass.Mindthief:
-                //sql = sql + " AND ClassName = 'Mindthief' ";
-                //break;
-                //case CardClass.Sunkeeper:
-                //sql = sql + " AND ClassName = 'Sunkeeper' ";
-                //break;
-                //case CardClass.Quartermaster:
-                //sql = sql + " AND ClassName = 'Quartermaster' ";
-                //break;
-                //case CardClass.Summoner:
-                //sql = sql + " AND ClassName = 'Summoner' ";
-                //break;
-                //case CardClass.Nightshroud:
-                //sql = sql + " AND ClassName = 'Nightshroud' ";
-                //break;
-                //case CardClass.Plagueherald:
-                //sql = sql + " AND ClassName = 'Plagueherald' ";
-                //break;
-                //case CardClass.Berserker:
-                //sql = sql + " AND ClassName = 'Berserker' ";
-                //break;
-                //case CardClass.Soothsinger:
-                //sql = sql + " AND ClassName = 'Soothsinger' ";
-                //break;
-                //case CardClass.Doomstalker:
-                //sql = sql + " AND ClassName = 'Doomstalker' ";
-                //break;
-                //case CardClass.Elementalist:
-                //sql = sql + " AND ClassName = 'Elementalist' ";
-                //break;
-                //case CardClass.Sawbones:
-                //sql = sql + " AND ClassName = 'Sawbones' ";
-                //break;
-                //case CardClass.Beast_Tyrant:
-                //sql = sql + " AND ClassName = 'Beast_Tyrant' ";
-                //break;
+                case CardClass.Mindthief:
+                sql = sql + " AND ClassName = 'Mindthief' ";
+                break;
+                case CardClass.Sunkeeper:
+                sql = sql + " AND ClassName = 'Sunkeeper' ";
+                break;
+                case CardClass.Quartermaster:
+                sql = sql + " AND ClassName = 'Quartermaster' ";
+                break;
+                case CardClass.Summoner:
+                sql = sql + " AND ClassName = 'Summoner' ";
+                break;
+                case CardClass.Nightshroud:
+                sql = sql + " AND ClassName = 'Nightshroud' ";
+                break;
+                case CardClass.Plagueherald:
+                sql = sql + " AND ClassName = 'Plagueherald' ";
+                break;
+                case CardClass.Berserker:
+                sql = sql + " AND ClassName = 'Berserker' ";
+                break;
+                case CardClass.Soothsinger:
+                sql = sql + " AND ClassName = 'Soothsinger' ";
+                break;
+                case CardClass.Doomstalker:
+                sql = sql + " AND ClassName = 'Doomstalker' ";
+                break;
+                case CardClass.Elementalist:
+                sql = sql + " AND ClassName = 'Elementalist' ";
+                break;
+                case CardClass.Sawbones:
+                sql = sql + " AND ClassName = 'Sawbones' ";
+                break;
+                case CardClass.Beast_Tyrant:
+                sql = sql + " AND ClassName = 'Beast Tyrant' ";
+                break;
+                case CardClass.Diviner:
+                sql = sql + " AND ClassName = 'Diviner' ";
+                break;
+                case CardClass.Bladeswarm:
+                sql = sql + " AND ClassName = 'Bladeswarm' ";
+                break;
                 default:
                     break;
             }
@@ -212,13 +219,13 @@ namespace GHCardsApp
 
         void radioButtton_CheckedChanged(object sender, EventArgs e)
         {
-            
+
             RadioButton radioButton = sender as RadioButton;
             if (radioButton != null && radioButton.Checked && radioButton.Tag != null)
             {
                 selectedOption = (CardClass)radioButton.Tag;
                 searchBar();
-                classRadioButton(selectedOption);
+                classSwitch(selectedOption);
                 GeneratePictureBoxes(query(sql, connectionString));
             }
         }
