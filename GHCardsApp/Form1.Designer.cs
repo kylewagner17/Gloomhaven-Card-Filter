@@ -1,15 +1,24 @@
 ﻿using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 using RadioButton = System.Windows.Forms.RadioButton;
+using ComboBox = System.Windows.Forms.ComboBox;
+using Button = System.Windows.Forms.Button;
+using CheckBox = System.Windows.Forms.CheckBox;
+using TrackBar = System.Windows.Forms.TrackBar;
+using TextBox = System.Windows.Forms.TextBox;
 
 namespace GHCardsApp
 {
+
+    
     partial class Form1
     {
         /// <summary>
         ///  Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+
 
         /// <summary>
         ///  Clean up any resources being used.
@@ -56,6 +65,21 @@ namespace GHCardsApp
             radioButton17 = new RadioButton();
             radioButton18 = new RadioButton();
             radioButton19 = new RadioButton();
+            checkBox1 = new CheckBox();
+            checkBox2 = new CheckBox();
+            checkBox3 = new CheckBox();
+            comboBox1 = new ComboBox();
+            comboBox2 = new ComboBox();
+            comboBox3 = new ComboBox();
+            checkBox4 = new CheckBox();
+            comboBox4 = new ComboBox();
+            checkBox5 = new CheckBox();
+            checkBox6 = new CheckBox();
+            checkBox7 = new CheckBox();
+            checkBox8 = new CheckBox();
+            checkBox9 = new CheckBox();
+            checkBox10 = new CheckBox();
+            checkBox11 = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             SuspendLayout();
             // 
@@ -124,7 +148,7 @@ namespace GHCardsApp
             radioButton1.TextAlign = ContentAlignment.MiddleCenter;
             radioButton1.TextImageRelation = TextImageRelation.ImageAboveText;
             radioButton1.UseVisualStyleBackColor = true;
-            radioButton1.CheckedChanged += radioButtton_CheckedChanged;
+            radioButton1.CheckedChanged += RadioButton_CheckedChanged;
             // 
             // radioButton2
             // 
@@ -140,7 +164,7 @@ namespace GHCardsApp
             radioButton2.TextAlign = ContentAlignment.MiddleCenter;
             radioButton2.TextImageRelation = TextImageRelation.ImageAboveText;
             radioButton2.UseVisualStyleBackColor = true;
-            radioButton2.CheckedChanged += radioButtton_CheckedChanged;
+            radioButton2.CheckedChanged += RadioButton_CheckedChanged;
             // 
             // radioButton3
             // 
@@ -156,7 +180,7 @@ namespace GHCardsApp
             radioButton3.TextAlign = ContentAlignment.MiddleCenter;
             radioButton3.TextImageRelation = TextImageRelation.ImageAboveText;
             radioButton3.UseVisualStyleBackColor = true;
-            radioButton3.CheckedChanged += radioButtton_CheckedChanged;
+            radioButton3.CheckedChanged += RadioButton_CheckedChanged;
             // 
             // radioButton4
             // 
@@ -172,7 +196,7 @@ namespace GHCardsApp
             radioButton4.TextAlign = ContentAlignment.MiddleCenter;
             radioButton4.TextImageRelation = TextImageRelation.ImageAboveText;
             radioButton4.UseVisualStyleBackColor = true;
-            radioButton4.CheckedChanged += radioButtton_CheckedChanged;
+            radioButton4.CheckedChanged += RadioButton_CheckedChanged;
             // 
             // radioButton5
             // 
@@ -188,7 +212,7 @@ namespace GHCardsApp
             radioButton5.TextAlign = ContentAlignment.MiddleCenter;
             radioButton5.TextImageRelation = TextImageRelation.ImageAboveText;
             radioButton5.UseVisualStyleBackColor = true;
-            radioButton5.CheckedChanged += radioButtton_CheckedChanged;
+            radioButton5.CheckedChanged += RadioButton_CheckedChanged;
             // 
             // radioButton6
             // 
@@ -204,7 +228,7 @@ namespace GHCardsApp
             radioButton6.TextAlign = ContentAlignment.MiddleCenter;
             radioButton6.TextImageRelation = TextImageRelation.ImageAboveText;
             radioButton6.UseVisualStyleBackColor = true;
-            radioButton6.CheckedChanged += radioButtton_CheckedChanged;
+            radioButton6.CheckedChanged += RadioButton_CheckedChanged;
             // 
             // radioButton7
             // 
@@ -220,7 +244,7 @@ namespace GHCardsApp
             radioButton7.TextAlign = ContentAlignment.MiddleCenter;
             radioButton7.TextImageRelation = TextImageRelation.ImageAboveText;
             radioButton7.UseVisualStyleBackColor = true;
-            radioButton7.CheckedChanged += radioButtton_CheckedChanged;
+            radioButton7.CheckedChanged += RadioButton_CheckedChanged;
             // 
             // radioButton8
             // 
@@ -236,7 +260,7 @@ namespace GHCardsApp
             radioButton8.TextAlign = ContentAlignment.MiddleCenter;
             radioButton8.TextImageRelation = TextImageRelation.ImageAboveText;
             radioButton8.UseVisualStyleBackColor = true;
-            radioButton8.CheckedChanged += radioButtton_CheckedChanged;
+            radioButton8.CheckedChanged += RadioButton_CheckedChanged;
             // 
             // radioButton9
             // 
@@ -252,7 +276,7 @@ namespace GHCardsApp
             radioButton9.TextAlign = ContentAlignment.MiddleCenter;
             radioButton9.TextImageRelation = TextImageRelation.ImageAboveText;
             radioButton9.UseVisualStyleBackColor = true;
-            radioButton9.CheckedChanged += radioButtton_CheckedChanged;
+            radioButton9.CheckedChanged += RadioButton_CheckedChanged;
             // 
             // radioButton10
             // 
@@ -268,7 +292,7 @@ namespace GHCardsApp
             radioButton10.TextAlign = ContentAlignment.MiddleCenter;
             radioButton10.TextImageRelation = TextImageRelation.ImageAboveText;
             radioButton10.UseVisualStyleBackColor = true;
-            radioButton10.CheckedChanged += radioButtton_CheckedChanged;
+            radioButton10.CheckedChanged += RadioButton_CheckedChanged;
             // 
             // radioButton11
             // 
@@ -284,7 +308,7 @@ namespace GHCardsApp
             radioButton11.TextAlign = ContentAlignment.MiddleCenter;
             radioButton11.TextImageRelation = TextImageRelation.ImageAboveText;
             radioButton11.UseVisualStyleBackColor = true;
-            radioButton11.CheckedChanged += radioButtton_CheckedChanged;
+            radioButton11.CheckedChanged += RadioButton_CheckedChanged;
             // 
             // radioButton12
             // 
@@ -300,7 +324,7 @@ namespace GHCardsApp
             radioButton12.TextAlign = ContentAlignment.MiddleCenter;
             radioButton12.TextImageRelation = TextImageRelation.ImageAboveText;
             radioButton12.UseVisualStyleBackColor = true;
-            radioButton12.CheckedChanged += radioButtton_CheckedChanged;
+            radioButton12.CheckedChanged += RadioButton_CheckedChanged;
             // 
             // radioButton13
             // 
@@ -316,7 +340,7 @@ namespace GHCardsApp
             radioButton13.TextAlign = ContentAlignment.MiddleCenter;
             radioButton13.TextImageRelation = TextImageRelation.ImageAboveText;
             radioButton13.UseVisualStyleBackColor = true;
-            radioButton13.CheckedChanged += radioButtton_CheckedChanged;
+            radioButton13.CheckedChanged += RadioButton_CheckedChanged;
             // 
             // radioButton14
             // 
@@ -332,7 +356,7 @@ namespace GHCardsApp
             radioButton14.TextAlign = ContentAlignment.MiddleCenter;
             radioButton14.TextImageRelation = TextImageRelation.ImageAboveText;
             radioButton14.UseVisualStyleBackColor = true;
-            radioButton14.CheckedChanged += radioButtton_CheckedChanged;
+            radioButton14.CheckedChanged += RadioButton_CheckedChanged;
             // 
             // radioButton15
             // 
@@ -348,7 +372,7 @@ namespace GHCardsApp
             radioButton15.TextAlign = ContentAlignment.MiddleCenter;
             radioButton15.TextImageRelation = TextImageRelation.ImageAboveText;
             radioButton15.UseVisualStyleBackColor = true;
-            radioButton15.CheckedChanged += radioButtton_CheckedChanged;
+            radioButton15.CheckedChanged += RadioButton_CheckedChanged;
             // 
             // radioButton16
             // 
@@ -364,7 +388,7 @@ namespace GHCardsApp
             radioButton16.TextAlign = ContentAlignment.MiddleCenter;
             radioButton16.TextImageRelation = TextImageRelation.ImageAboveText;
             radioButton16.UseVisualStyleBackColor = true;
-            radioButton16.CheckedChanged += radioButtton_CheckedChanged;
+            radioButton16.CheckedChanged += RadioButton_CheckedChanged;
             // 
             // radioButton17
             // 
@@ -380,7 +404,7 @@ namespace GHCardsApp
             radioButton17.TextAlign = ContentAlignment.MiddleCenter;
             radioButton17.TextImageRelation = TextImageRelation.ImageAboveText;
             radioButton17.UseVisualStyleBackColor = true;
-            radioButton17.CheckedChanged += radioButtton_CheckedChanged;
+            radioButton17.CheckedChanged += RadioButton_CheckedChanged;
             // 
             // radioButton18
             // 
@@ -396,7 +420,7 @@ namespace GHCardsApp
             radioButton18.TextAlign = ContentAlignment.MiddleCenter;
             radioButton18.TextImageRelation = TextImageRelation.ImageAboveText;
             radioButton18.UseVisualStyleBackColor = true;
-            radioButton18.CheckedChanged += radioButtton_CheckedChanged;
+            radioButton18.CheckedChanged += RadioButton_CheckedChanged;
             // 
             // radioButton19
             // 
@@ -412,7 +436,157 @@ namespace GHCardsApp
             radioButton19.TextAlign = ContentAlignment.MiddleCenter;
             radioButton19.TextImageRelation = TextImageRelation.ImageAboveText;
             radioButton19.UseVisualStyleBackColor = true;
-            radioButton19.CheckedChanged += radioButtton_CheckedChanged;
+            radioButton19.CheckedChanged += RadioButton_CheckedChanged;
+            // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(12, 12);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(60, 19);
+            checkBox1.TabIndex = 24;
+            checkBox1.Text = "Attack";
+            checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            checkBox2.AutoSize = true;
+            checkBox2.Location = new Point(12, 37);
+            checkBox2.Name = "checkBox2";
+            checkBox2.Size = new Size(56, 19);
+            checkBox2.TabIndex = 25;
+            checkBox2.Text = "Move";
+            checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox3
+            // 
+            checkBox3.AutoSize = true;
+            checkBox3.Location = new Point(12, 62);
+            checkBox3.Name = "checkBox3";
+            checkBox3.Size = new Size(59, 19);
+            checkBox3.TabIndex = 26;
+            checkBox3.Text = "Range";
+            checkBox3.UseVisualStyleBackColor = true;
+            // 
+            // comboBox1
+            // 
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(78, 10);
+            comboBox1.MaxDropDownItems = 3;
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(34, 23);
+            comboBox1.TabIndex = 27;
+            // 
+            // comboBox2
+            // 
+            comboBox2.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox2.FormattingEnabled = true;
+            comboBox2.Location = new Point(78, 35);
+            comboBox2.MaxDropDownItems = 3;
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new Size(34, 23);
+            comboBox2.TabIndex = 28;
+            // 
+            // comboBox3
+            // 
+            comboBox3.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox3.FormattingEnabled = true;
+            comboBox3.Location = new Point(78, 60);
+            comboBox3.MaxDropDownItems = 3;
+            comboBox3.Name = "comboBox3";
+            comboBox3.Size = new Size(34, 23);
+            comboBox3.TabIndex = 29;
+            // 
+            // checkBox4
+            // 
+            checkBox4.AutoSize = true;
+            checkBox4.Location = new Point(12, 87);
+            checkBox4.Name = "checkBox4";
+            checkBox4.Size = new Size(57, 19);
+            checkBox4.TabIndex = 30;
+            checkBox4.Text = "Suffer";
+            checkBox4.UseVisualStyleBackColor = true;
+            // 
+            // comboBox4
+            // 
+            comboBox4.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox4.FormattingEnabled = true;
+            comboBox4.Location = new Point(78, 85);
+            comboBox4.MaxDropDownItems = 3;
+            comboBox4.Name = "comboBox4";
+            comboBox4.Size = new Size(34, 23);
+            comboBox4.TabIndex = 31;
+            // 
+            // checkBox5
+            // 
+            checkBox5.AutoSize = true;
+            checkBox5.Location = new Point(12, 112);
+            checkBox5.Name = "checkBox5";
+            checkBox5.Size = new Size(103, 19);
+            checkBox5.TabIndex = 32;
+            checkBox5.Text = "Ranged Attack";
+            checkBox5.UseVisualStyleBackColor = true;
+            // 
+            // checkBox6
+            // 
+            checkBox6.AutoSize = true;
+            checkBox6.Location = new Point(12, 137);
+            checkBox6.Name = "checkBox6";
+            checkBox6.Size = new Size(45, 19);
+            checkBox6.TabIndex = 33;
+            checkBox6.Text = "aoe";
+            checkBox6.UseVisualStyleBackColor = true;
+            // 
+            // checkBox7
+            // 
+            checkBox7.AutoSize = true;
+            checkBox7.Location = new Point(12, 157);
+            checkBox7.Name = "checkBox7";
+            checkBox7.Size = new Size(54, 19);
+            checkBox7.TabIndex = 34;
+            checkBox7.Text = "jump";
+            checkBox7.UseVisualStyleBackColor = true;
+            // 
+            // checkBox8
+            // 
+            checkBox8.AutoSize = true;
+            checkBox8.Location = new Point(12, 177);
+            checkBox8.Name = "checkBox8";
+            checkBox8.Size = new Size(67, 19);
+            checkBox8.TabIndex = 35;
+            checkBox8.Text = "teleport";
+            checkBox8.UseVisualStyleBackColor = true;
+            // 
+            // checkBox9
+            // 
+            checkBox9.AutoSize = true;
+            checkBox9.Location = new Point(12, 197);
+            checkBox9.Name = "checkBox9";
+            checkBox9.Size = new Size(109, 19);
+            checkBox9.TabIndex = 36;
+            checkBox9.Text = "moved through";
+            checkBox9.UseVisualStyleBackColor = true;
+            // 
+            // checkBox10
+            // 
+            checkBox10.AutoSize = true;
+            checkBox10.Location = new Point(12, 217);
+            checkBox10.Name = "checkBox10";
+            checkBox10.Size = new Size(69, 19);
+            checkBox10.TabIndex = 37;
+            checkBox10.Text = "element";
+            checkBox10.UseVisualStyleBackColor = true;
+            // 
+            // checkBox11
+            // 
+            checkBox11.AutoSize = true;
+            checkBox11.Location = new Point(12, 242);
+            checkBox11.Name = "checkBox11";
+            checkBox11.Size = new Size(60, 19);
+            checkBox11.TabIndex = 38;
+            checkBox11.Text = "forced";
+            checkBox11.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -422,6 +596,21 @@ namespace GHCardsApp
             AutoScroll = true;
             BackColor = SystemColors.Window;
             ClientSize = new Size(1121, 657);
+            Controls.Add(checkBox11);
+            Controls.Add(checkBox10);
+            Controls.Add(checkBox9);
+            Controls.Add(checkBox8);
+            Controls.Add(checkBox7);
+            Controls.Add(checkBox6);
+            Controls.Add(checkBox5);
+            Controls.Add(comboBox4);
+            Controls.Add(checkBox4);
+            Controls.Add(comboBox3);
+            Controls.Add(comboBox2);
+            Controls.Add(comboBox1);
+            Controls.Add(checkBox3);
+            Controls.Add(checkBox2);
+            Controls.Add(checkBox1);
             Controls.Add(radioButton19);
             Controls.Add(radioButton18);
             Controls.Add(radioButton17);
@@ -452,25 +641,6 @@ namespace GHCardsApp
             PerformLayout();
         }
 
-        /*private void ClearControls()
-        {
-            // Remove TableLayoutPanel and pictureboxes
-            for (int i = Controls.Count - 1; i >= 0; i--)
-            {
-                if (Controls[i] != button1 && Controls[i] != textBox1 && Controls[i] != trackBar1
-                   && Controls[i] != trackBarText && Controls[i] != radioButton1 && Controls[i] != radioButton2
-                   && Controls[i] != radioButton3 && Controls[i] != radioButton4 && Controls[i] != radioButton5
-                   && Controls[i] != radioButton6 && Controls[i] != radioButton7 && Controls[i] != radioButton8 
-                   && Controls[i] != radioButton9 && Controls[i] != radioButton10 && Controls[i] != radioButton11 
-                   && Controls[i] != radioButton12 && Controls[i] != radioButton13 && Controls[i] != radioButton14 
-                   && Controls[i] != radioButton15 && Controls[i] != radioButton16 && Controls[i] != radioButton17 
-                   && Controls[i] != radioButton18 && Controls[i] != radioButton19)
-                {
-                    Controls.RemoveAt(i);
-                }
-            }
-        }*/
-
         // Used to clear Tablelayoutpanel and Pictureboxes
         private void ClearControls()
         {
@@ -479,8 +649,11 @@ namespace GHCardsApp
         button1, textBox1, trackBar1, trackBarText
     };
 
-            controlsToKeep.UnionWith(Controls.OfType<RadioButton>()
-                .Where(radioButton => radioButton.Name.StartsWith("radioButton")));
+            controlsToKeep.UnionWith(Controls.OfType<RadioButton>().Where(radioButton => radioButton.Name.StartsWith("radioButton")));
+
+            controlsToKeep.UnionWith(Controls.OfType<ComboBox>().Where(comboBox => comboBox.Name.StartsWith("comboBox")));
+
+            controlsToKeep.UnionWith(Controls.OfType<CheckBox>().Where(checkBox => checkBox.Name.StartsWith("checkBox")));
 
             for (int i = Controls.Count - 1; i >= 0; i--)
             {
@@ -521,5 +694,20 @@ namespace GHCardsApp
         private RadioButton radioButton17;
         private RadioButton radioButton18;
         private RadioButton radioButton19;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBox3;
+        private ComboBox comboBox1;
+        private ComboBox comboBox2;
+        private ComboBox comboBox3;
+        private CheckBox checkBox4;
+        private ComboBox comboBox4;
+        private CheckBox checkBox5;
+        private CheckBox checkBox6;
+        private CheckBox checkBox7;
+        private CheckBox checkBox8;
+        private CheckBox checkBox9;
+        private CheckBox checkBox10;
+        private CheckBox checkBox11;
     }
 }
