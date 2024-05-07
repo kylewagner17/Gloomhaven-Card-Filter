@@ -15,21 +15,38 @@ namespace GHCardsApp
     {
         // Creating string containing information for connecting to sql server
         // Server=localhost\SQLEXPRESS;Database=master;Trusted_Connection=True;
-        private string connectionString = @"Data Source=DESKTOP-QN510QT\SQLEXPRESS;Initial Catalog=""Gloomhaven Cards"";Integrated Security=True;Encrypt=False;Trusted_Connection=True;";
+        private string test = "";
+        private string connectionString = @"Initial Catalog=""Gloomhaven Cards"";Integrated Security=True;";
+        //private string connectionString = @"Data Source=DESKTOP-QN510QT\SQLEXPRESS;Initial Catalog=""Gloomhaven Cards"";Integrated Security=True;Encrypt=False;Trusted_Connection=True;";
+
+        string filePath = @"C:\Users\Kyle\source\repos\GHCardsApp\SQL_Password.txt";
         private string sql = "SELECT CardPicture FROM Gloomhaven_Cards";
         private DataSet ds = new DataSet();
         private Byte[] byteBLOBData = new Byte[0];
         private CardClass selectedOption = CardClass.Brute;
         private enum CardClass
         {
-            Brute, Tinkerer, Spellweaver, Scoundrel, Cragheart, Mindthief, Sunkeeper, Quartermaster, Summoner,
-            Nightshroud, Plagueherald, Berserker, Soothsinger, Doomstalker, Sawbones, Elementalist, Beast_Tyrant, Diviner, Bladeswarm
+            Brute, Tinkerer, Spellweaver, Scoundrel,
+            Cragheart, Mindthief, Sunkeeper, Quartermaster,
+            Summoner, Nightshroud, Plagueherald, Berserker,
+            Soothsinger, Doomstalker, Sawbones, Elementalist,
+            Beast_Tyrant, Diviner, Bladeswarm
         };
 
         public Form1()
         {
             InitializeComponent();
             //Testing----------------------------
+            using (StreamReader sr = new StreamReader(filePath))
+            {
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                { 
+                    connectionString = line + connectionString; 
+                }
+
+            }
+
             string[] options = { "=", ">", "<" };
             comboBox1.Items.AddRange(options);
             comboBox2.Items.AddRange(options);
@@ -48,11 +65,8 @@ namespace GHCardsApp
         {
             searchBar();
             ClassSwitch(selectedOption);
-            GeneratePictureBoxes(Query(sql, connectionString));
-            //-------------------------
             CheckCheckBoxes();
-            MessageBox.Show(sql);
-            //-------------------------
+            GeneratePictureBoxes(Query(sql, connectionString));
         }
 
         // Saves search input into string to pass to sql query
@@ -63,6 +77,7 @@ namespace GHCardsApp
             {
                 sql += " AND (TopText LIKE '%" + textBox1.Text + "%' OR BotText LIKE '%" + textBox1.Text + "%')";
             }
+
         }
 
         // Queries the sql database and fills dataset with query
@@ -152,6 +167,7 @@ namespace GHCardsApp
 
             trackBarText.Text = "Level: " + trackBar1.Value;
             ClassSwitch(selectedOption);
+            CheckCheckBoxes();
             GeneratePictureBoxes(Query(sql, connectionString));
         }
 
@@ -247,7 +263,6 @@ namespace GHCardsApp
                 {
                     if (checkBox.Checked)
                     {
-                        MessageBox.Show($"CheckBox '{checkBox.Text}' is checked.");
                         sql += " AND (TopText LIKE '%" + checkBox.Text + "%' OR BotText LIKE '%" + checkBox.Text + "%')";
                     }
                 }
@@ -266,5 +281,14 @@ namespace GHCardsApp
             }
         }
 
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox5_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

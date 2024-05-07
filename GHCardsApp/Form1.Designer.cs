@@ -80,6 +80,8 @@ namespace GHCardsApp
             checkBox9 = new CheckBox();
             checkBox10 = new CheckBox();
             checkBox11 = new CheckBox();
+            checkBox12 = new CheckBox();
+            checkedListBox1 = new CheckedListBox();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             SuspendLayout();
             // 
@@ -451,7 +453,7 @@ namespace GHCardsApp
             // checkBox2
             // 
             checkBox2.AutoSize = true;
-            checkBox2.Location = new Point(12, 37);
+            checkBox2.Location = new Point(12, 173);
             checkBox2.Name = "checkBox2";
             checkBox2.Size = new Size(56, 19);
             checkBox2.TabIndex = 25;
@@ -461,18 +463,19 @@ namespace GHCardsApp
             // checkBox3
             // 
             checkBox3.AutoSize = true;
-            checkBox3.Location = new Point(12, 62);
+            checkBox3.Location = new Point(12, 46);
             checkBox3.Name = "checkBox3";
             checkBox3.Size = new Size(59, 19);
             checkBox3.TabIndex = 26;
             checkBox3.Text = "Range";
             checkBox3.UseVisualStyleBackColor = true;
+            checkBox3.CheckedChanged += checkBox3_CheckedChanged;
             // 
             // comboBox1
             // 
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(78, 10);
+            comboBox1.Location = new Point(78, 8);
             comboBox1.MaxDropDownItems = 3;
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(34, 23);
@@ -482,7 +485,7 @@ namespace GHCardsApp
             // 
             comboBox2.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(78, 35);
+            comboBox2.Location = new Point(78, 169);
             comboBox2.MaxDropDownItems = 3;
             comboBox2.Name = "comboBox2";
             comboBox2.Size = new Size(34, 23);
@@ -492,7 +495,7 @@ namespace GHCardsApp
             // 
             comboBox3.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(78, 60);
+            comboBox3.Location = new Point(78, 42);
             comboBox3.MaxDropDownItems = 3;
             comboBox3.Name = "comboBox3";
             comboBox3.Size = new Size(34, 23);
@@ -501,7 +504,7 @@ namespace GHCardsApp
             // checkBox4
             // 
             checkBox4.AutoSize = true;
-            checkBox4.Location = new Point(12, 87);
+            checkBox4.Location = new Point(12, 146);
             checkBox4.Name = "checkBox4";
             checkBox4.Size = new Size(57, 19);
             checkBox4.TabIndex = 30;
@@ -512,7 +515,7 @@ namespace GHCardsApp
             // 
             comboBox4.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox4.FormattingEnabled = true;
-            comboBox4.Location = new Point(78, 85);
+            comboBox4.Location = new Point(78, 142);
             comboBox4.MaxDropDownItems = 3;
             comboBox4.Name = "comboBox4";
             comboBox4.Size = new Size(34, 23);
@@ -521,7 +524,7 @@ namespace GHCardsApp
             // checkBox5
             // 
             checkBox5.AutoSize = true;
-            checkBox5.Location = new Point(12, 112);
+            checkBox5.Location = new Point(12, 96);
             checkBox5.Name = "checkBox5";
             checkBox5.Size = new Size(103, 19);
             checkBox5.TabIndex = 32;
@@ -531,7 +534,7 @@ namespace GHCardsApp
             // checkBox6
             // 
             checkBox6.AutoSize = true;
-            checkBox6.Location = new Point(12, 137);
+            checkBox6.Location = new Point(12, 121);
             checkBox6.Name = "checkBox6";
             checkBox6.Size = new Size(45, 19);
             checkBox6.TabIndex = 33;
@@ -541,7 +544,7 @@ namespace GHCardsApp
             // checkBox7
             // 
             checkBox7.AutoSize = true;
-            checkBox7.Location = new Point(12, 157);
+            checkBox7.Location = new Point(12, 198);
             checkBox7.Name = "checkBox7";
             checkBox7.Size = new Size(54, 19);
             checkBox7.TabIndex = 34;
@@ -551,7 +554,7 @@ namespace GHCardsApp
             // checkBox8
             // 
             checkBox8.AutoSize = true;
-            checkBox8.Location = new Point(12, 177);
+            checkBox8.Location = new Point(12, 223);
             checkBox8.Name = "checkBox8";
             checkBox8.Size = new Size(67, 19);
             checkBox8.TabIndex = 35;
@@ -561,7 +564,7 @@ namespace GHCardsApp
             // checkBox9
             // 
             checkBox9.AutoSize = true;
-            checkBox9.Location = new Point(12, 197);
+            checkBox9.Location = new Point(12, 248);
             checkBox9.Name = "checkBox9";
             checkBox9.Size = new Size(109, 19);
             checkBox9.TabIndex = 36;
@@ -571,7 +574,7 @@ namespace GHCardsApp
             // checkBox10
             // 
             checkBox10.AutoSize = true;
-            checkBox10.Location = new Point(12, 217);
+            checkBox10.Location = new Point(12, 298);
             checkBox10.Name = "checkBox10";
             checkBox10.Size = new Size(69, 19);
             checkBox10.TabIndex = 37;
@@ -581,12 +584,30 @@ namespace GHCardsApp
             // checkBox11
             // 
             checkBox11.AutoSize = true;
-            checkBox11.Location = new Point(12, 242);
+            checkBox11.Location = new Point(12, 273);
             checkBox11.Name = "checkBox11";
             checkBox11.Size = new Size(60, 19);
             checkBox11.TabIndex = 38;
             checkBox11.Text = "forced";
             checkBox11.UseVisualStyleBackColor = true;
+            // 
+            // checkBox12
+            // 
+            checkBox12.AutoSize = true;
+            checkBox12.Location = new Point(12, 71);
+            checkBox12.Name = "checkBox12";
+            checkBox12.Size = new Size(58, 19);
+            checkBox12.TabIndex = 39;
+            checkBox12.Text = "Melee";
+            checkBox12.UseVisualStyleBackColor = true;
+            // 
+            // checkedListBox1
+            // 
+            checkedListBox1.FormattingEnabled = true;
+            checkedListBox1.Location = new Point(12, 336);
+            checkedListBox1.Name = "checkedListBox1";
+            checkedListBox1.Size = new Size(120, 94);
+            checkedListBox1.TabIndex = 41;
             // 
             // Form1
             // 
@@ -596,6 +617,8 @@ namespace GHCardsApp
             AutoScroll = true;
             BackColor = SystemColors.Window;
             ClientSize = new Size(1121, 657);
+            Controls.Add(checkedListBox1);
+            Controls.Add(checkBox12);
             Controls.Add(checkBox11);
             Controls.Add(checkBox10);
             Controls.Add(checkBox9);
@@ -709,5 +732,7 @@ namespace GHCardsApp
         private CheckBox checkBox9;
         private CheckBox checkBox10;
         private CheckBox checkBox11;
+        private CheckBox checkBox12;
+        private CheckedListBox checkedListBox1;
     }
 }
