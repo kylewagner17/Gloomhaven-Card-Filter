@@ -8,18 +8,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xaml.Permissions;
 
 namespace GHCardsApp
 {
     public partial class Form1 : Form
     {
-        // Creating string containing information for connecting to sql server
-        // Server=localhost\SQLEXPRESS;Database=master;Trusted_Connection=True;
-        private string test = "";
+        // Initializing variables
         private string connectionString = @"Initial Catalog=""Gloomhaven Cards"";Integrated Security=True;";
-        //private string connectionString = @"Data Source=DESKTOP-QN510QT\SQLEXPRESS;Initial Catalog=""Gloomhaven Cards"";Integrated Security=True;Encrypt=False;Trusted_Connection=True;";
-
-        string filePath = @"C:\Users\Kyle\source\repos\GHCardsApp\SQL_Password.txt";
+        private string filePath = @"C:\Users\Kyle\source\repos\GHCardsApp\SQL_Password.txt";
         private string sql = "SELECT CardPicture FROM Gloomhaven_Cards";
         private DataSet ds = new DataSet();
         private Byte[] byteBLOBData = new Byte[0];
@@ -40,7 +37,7 @@ namespace GHCardsApp
             using (StreamReader sr = new StreamReader(filePath))
             {
                 string line;
-                while ((line = sr.ReadLine()) != null)
+                if ((line = sr.ReadLine()) != null)
                 { 
                     connectionString = line + connectionString; 
                 }
@@ -75,7 +72,7 @@ namespace GHCardsApp
             sql = "SELECT CardPicture FROM Gloomhaven_Cards WHERE CardLevel <= " + trackBar1.Value + " ";
             if (textBox1.Text != "")
             {
-                sql += " AND (TopText LIKE '%" + textBox1.Text + "%' OR BotText LIKE '%" + textBox1.Text + "%')";
+                sql += " AND (CardName LIKE '%" + textBox1.Text + "%')";
             }
 
         }
@@ -97,6 +94,7 @@ namespace GHCardsApp
         {
             SuspendLayout();
             ClearControls();
+            this.AutoScrollPosition = new Point(0, 0);
 
             int numCols = 4; // Number of columns
 
@@ -280,6 +278,8 @@ namespace GHCardsApp
                 }
             }
         }
+        
+
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
         {
@@ -290,5 +290,6 @@ namespace GHCardsApp
         {
 
         }
+
     }
 }

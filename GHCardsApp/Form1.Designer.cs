@@ -73,15 +73,11 @@ namespace GHCardsApp
             comboBox3 = new ComboBox();
             checkBox4 = new CheckBox();
             comboBox4 = new ComboBox();
-            checkBox5 = new CheckBox();
             checkBox6 = new CheckBox();
-            checkBox7 = new CheckBox();
-            checkBox8 = new CheckBox();
-            checkBox9 = new CheckBox();
-            checkBox10 = new CheckBox();
-            checkBox11 = new CheckBox();
-            checkBox12 = new CheckBox();
-            checkedListBox1 = new CheckedListBox();
+            MoveOptions = new CheckedListBox();
+            AttackOptions = new CheckedListBox();
+            Elements = new CheckedListBox();
+            ForcedMovement = new CheckedListBox();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             SuspendLayout();
             // 
@@ -521,93 +517,53 @@ namespace GHCardsApp
             comboBox4.Size = new Size(34, 23);
             comboBox4.TabIndex = 31;
             // 
-            // checkBox5
-            // 
-            checkBox5.AutoSize = true;
-            checkBox5.Location = new Point(12, 96);
-            checkBox5.Name = "checkBox5";
-            checkBox5.Size = new Size(103, 19);
-            checkBox5.TabIndex = 32;
-            checkBox5.Text = "Ranged Attack";
-            checkBox5.UseVisualStyleBackColor = true;
-            // 
             // checkBox6
             // 
             checkBox6.AutoSize = true;
-            checkBox6.Location = new Point(12, 121);
+            checkBox6.Location = new Point(12, 117);
             checkBox6.Name = "checkBox6";
-            checkBox6.Size = new Size(45, 19);
+            checkBox6.Size = new Size(49, 19);
             checkBox6.TabIndex = 33;
-            checkBox6.Text = "aoe";
+            checkBox6.Text = "AOE";
             checkBox6.UseVisualStyleBackColor = true;
             // 
-            // checkBox7
+            // MoveOptions
             // 
-            checkBox7.AutoSize = true;
-            checkBox7.Location = new Point(12, 198);
-            checkBox7.Name = "checkBox7";
-            checkBox7.Size = new Size(54, 19);
-            checkBox7.TabIndex = 34;
-            checkBox7.Text = "jump";
-            checkBox7.UseVisualStyleBackColor = true;
+            MoveOptions.FormattingEnabled = true;
+            MoveOptions.Items.AddRange(new object[] { "Jump", "Moved Through", "Teleport" });
+            MoveOptions.Location = new Point(12, 198);
+            MoveOptions.Name = "MoveOptions";
+            MoveOptions.Size = new Size(118, 58);
+            MoveOptions.TabIndex = 41;
             // 
-            // checkBox8
+            // AttackOptions
             // 
-            checkBox8.AutoSize = true;
-            checkBox8.Location = new Point(12, 223);
-            checkBox8.Name = "checkBox8";
-            checkBox8.Size = new Size(67, 19);
-            checkBox8.TabIndex = 35;
-            checkBox8.Text = "teleport";
-            checkBox8.UseVisualStyleBackColor = true;
+            AttackOptions.FormattingEnabled = true;
+            AttackOptions.Items.AddRange(new object[] { "Melee", "Ranged Attack" });
+            AttackOptions.Location = new Point(12, 71);
+            AttackOptions.Name = "AttackOptions";
+            AttackOptions.Size = new Size(118, 40);
+            AttackOptions.TabIndex = 42;
             // 
-            // checkBox9
+            // Elements
             // 
-            checkBox9.AutoSize = true;
-            checkBox9.Location = new Point(12, 248);
-            checkBox9.Name = "checkBox9";
-            checkBox9.Size = new Size(109, 19);
-            checkBox9.TabIndex = 36;
-            checkBox9.Text = "moved through";
-            checkBox9.UseVisualStyleBackColor = true;
+            Elements.ColumnWidth = 60;
+            Elements.FormattingEnabled = true;
+            Elements.Items.AddRange(new object[] { "Fire", "Ice", "Wind", "Earth", "Light", "Dark", "Any" });
+            Elements.Location = new Point(12, 262);
+            Elements.MultiColumn = true;
+            Elements.Name = "Elements";
+            Elements.Size = new Size(125, 76);
+            Elements.TabIndex = 43;
             // 
-            // checkBox10
+            // ForcedMovement
             // 
-            checkBox10.AutoSize = true;
-            checkBox10.Location = new Point(12, 298);
-            checkBox10.Name = "checkBox10";
-            checkBox10.Size = new Size(69, 19);
-            checkBox10.TabIndex = 37;
-            checkBox10.Text = "element";
-            checkBox10.UseVisualStyleBackColor = true;
-            // 
-            // checkBox11
-            // 
-            checkBox11.AutoSize = true;
-            checkBox11.Location = new Point(12, 273);
-            checkBox11.Name = "checkBox11";
-            checkBox11.Size = new Size(60, 19);
-            checkBox11.TabIndex = 38;
-            checkBox11.Text = "forced";
-            checkBox11.UseVisualStyleBackColor = true;
-            // 
-            // checkBox12
-            // 
-            checkBox12.AutoSize = true;
-            checkBox12.Location = new Point(12, 71);
-            checkBox12.Name = "checkBox12";
-            checkBox12.Size = new Size(58, 19);
-            checkBox12.TabIndex = 39;
-            checkBox12.Text = "Melee";
-            checkBox12.UseVisualStyleBackColor = true;
-            // 
-            // checkedListBox1
-            // 
-            checkedListBox1.FormattingEnabled = true;
-            checkedListBox1.Location = new Point(12, 336);
-            checkedListBox1.Name = "checkedListBox1";
-            checkedListBox1.Size = new Size(120, 94);
-            checkedListBox1.TabIndex = 41;
+            ForcedMovement.FormattingEnabled = true;
+            ForcedMovement.Items.AddRange(new object[] { "Push", "Pull", "Grant Movement", "Any" });
+            ForcedMovement.Location = new Point(12, 344);
+            ForcedMovement.Name = "ForcedMovement";
+            ForcedMovement.Size = new Size(125, 76);
+            ForcedMovement.TabIndex = 44;
             // 
             // Form1
             // 
@@ -617,15 +573,11 @@ namespace GHCardsApp
             AutoScroll = true;
             BackColor = SystemColors.Window;
             ClientSize = new Size(1121, 657);
-            Controls.Add(checkedListBox1);
-            Controls.Add(checkBox12);
-            Controls.Add(checkBox11);
-            Controls.Add(checkBox10);
-            Controls.Add(checkBox9);
-            Controls.Add(checkBox8);
-            Controls.Add(checkBox7);
+            Controls.Add(ForcedMovement);
+            Controls.Add(Elements);
+            Controls.Add(AttackOptions);
+            Controls.Add(MoveOptions);
             Controls.Add(checkBox6);
-            Controls.Add(checkBox5);
             Controls.Add(comboBox4);
             Controls.Add(checkBox4);
             Controls.Add(comboBox3);
@@ -678,6 +630,8 @@ namespace GHCardsApp
 
             controlsToKeep.UnionWith(Controls.OfType<CheckBox>().Where(checkBox => checkBox.Name.StartsWith("checkBox")));
 
+            controlsToKeep.UnionWith(Controls.OfType<CheckedListBox>().Where(checkedListBox => checkedListBox.Name.StartsWith("")));
+
             for (int i = Controls.Count - 1; i >= 0; i--)
             {
                 if (!controlsToKeep.Contains(Controls[i]))
@@ -685,7 +639,12 @@ namespace GHCardsApp
                     Controls.RemoveAt(i);
                 }
             }
+
         }
+
+
+
+
 
         private void RadioButton2_CheckedChanged(object sender, EventArgs e)
         {
@@ -725,14 +684,12 @@ namespace GHCardsApp
         private ComboBox comboBox3;
         private CheckBox checkBox4;
         private ComboBox comboBox4;
-        private CheckBox checkBox5;
         private CheckBox checkBox6;
-        private CheckBox checkBox7;
-        private CheckBox checkBox8;
-        private CheckBox checkBox9;
         private CheckBox checkBox10;
         private CheckBox checkBox11;
-        private CheckBox checkBox12;
-        private CheckedListBox checkedListBox1;
+        private CheckedListBox MoveOptions;
+        private CheckedListBox AttackOptions;
+        private CheckedListBox Elements;
+        private CheckedListBox ForcedMovement;
     }
 }
