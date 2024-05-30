@@ -30,6 +30,7 @@ namespace GHCardsApp
             Beast_Tyrant, Diviner, Bladeswarm
         };
 
+
         public Form1()
         {
             InitializeComponent();
@@ -48,9 +49,11 @@ namespace GHCardsApp
             comboBox1.Items.AddRange(options);
             comboBox2.Items.AddRange(options);
             comboBox3.Items.AddRange(options);
+            comboBox4.Items.AddRange(options);
             comboBox1.SelectedIndex = 0;
             comboBox2.SelectedIndex = 0;
             comboBox3.SelectedIndex = 0;
+            comboBox4.SelectedIndex = 0; 
             //Testing----------------------------
             searchBar();
             ClassSwitch(selectedOption);
@@ -61,8 +64,11 @@ namespace GHCardsApp
         private void button1_Click(object sender, EventArgs e)
         {
             searchBar();
+            //testing ----------------------------------------------------------------------------------------------------------
+            addCheckedListBoxOptions();
+            //testing -----------------------------------------------------------------------------------------------------------
             ClassSwitch(selectedOption);
-            CheckCheckBoxes();
+            //CheckCheckBoxes();
             GeneratePictureBoxes(Query(sql, connectionString));
         }
 
@@ -165,7 +171,7 @@ namespace GHCardsApp
 
             trackBarText.Text = "Level: " + trackBar1.Value;
             ClassSwitch(selectedOption);
-            CheckCheckBoxes();
+            //CheckCheckBoxes();
             GeneratePictureBoxes(Query(sql, connectionString));
         }
 
@@ -238,7 +244,7 @@ namespace GHCardsApp
 
         // Runs a search after switching the current cardclass to the one clicked
         // Resets checkboxes
-        void RadioButton_CheckedChanged(object sender, EventArgs e)
+        private void RadioButton_CheckedChanged(object sender, EventArgs e)
         {
 
             RadioButton radioButton = sender as RadioButton;
@@ -252,9 +258,12 @@ namespace GHCardsApp
             }
         }
 
+
+
         // Check if any CheckBoxes are checked and perform an action for each checked CheckBox
-        private void CheckCheckBoxes()
+        private void CheckCheckBoxes(object sender, EventArgs e)
         {
+            searchBar();
             foreach (Control control in Controls)
             {
                 if (control is CheckBox checkBox)
@@ -265,6 +274,9 @@ namespace GHCardsApp
                     }
                 }
             }
+            addCheckedListBoxOptions();
+            ClassSwitch(selectedOption);
+            GeneratePictureBoxes(Query(sql, connectionString));
         }
 
         // Checks if each control is a checkbox, if yes, uncheck
@@ -279,16 +291,23 @@ namespace GHCardsApp
             }
         }
         
-
-
-        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        //Checks checked list boxes for any selected options and adds them to the sql query
+        private void addCheckedListBoxOptions()
         {
-
-        }
-
-        private void comboBox5_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
+            foreach (Control control in Controls)
+            {
+                if (control is CheckedListBox checkedListBox)
+                {
+                    if (checkedListBox.CheckedItems.Count != 0)
+                    {
+                        // If so, loop through all checked items and print results  
+                        for (int i = 0; i < checkedListBox.CheckedItems.Count; i++)
+                        {
+                            sql += " AND (TopText LIKE '%" + checkedListBox.CheckedItems[i].ToString() + "%' OR BotText LIKE '%" + checkedListBox.CheckedItems[i].ToString() + "%')";
+                        }
+                    }
+                }
+            }
         }
 
     }

@@ -445,6 +445,7 @@ namespace GHCardsApp
             checkBox1.TabIndex = 24;
             checkBox1.Text = "Attack";
             checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.CheckedChanged += CheckCheckBoxes;
             // 
             // checkBox2
             // 
@@ -455,6 +456,7 @@ namespace GHCardsApp
             checkBox2.TabIndex = 25;
             checkBox2.Text = "Move";
             checkBox2.UseVisualStyleBackColor = true;
+            checkBox2.CheckedChanged += CheckCheckBoxes;
             // 
             // checkBox3
             // 
@@ -465,7 +467,7 @@ namespace GHCardsApp
             checkBox3.TabIndex = 26;
             checkBox3.Text = "Range";
             checkBox3.UseVisualStyleBackColor = true;
-            checkBox3.CheckedChanged += checkBox3_CheckedChanged;
+            checkBox3.CheckedChanged += CheckCheckBoxes;
             // 
             // comboBox1
             // 
@@ -506,6 +508,7 @@ namespace GHCardsApp
             checkBox4.TabIndex = 30;
             checkBox4.Text = "Suffer";
             checkBox4.UseVisualStyleBackColor = true;
+            checkBox4.CheckedChanged += CheckCheckBoxes;
             // 
             // comboBox4
             // 
@@ -526,27 +529,33 @@ namespace GHCardsApp
             checkBox6.TabIndex = 33;
             checkBox6.Text = "AOE";
             checkBox6.UseVisualStyleBackColor = true;
+            checkBox6.CheckedChanged += CheckCheckBoxes;
             // 
             // MoveOptions
             // 
+            MoveOptions.CheckOnClick = true;
             MoveOptions.FormattingEnabled = true;
             MoveOptions.Items.AddRange(new object[] { "Jump", "Moved Through", "Teleport" });
             MoveOptions.Location = new Point(12, 198);
             MoveOptions.Name = "MoveOptions";
             MoveOptions.Size = new Size(118, 58);
             MoveOptions.TabIndex = 41;
+            MoveOptions.SelectedIndexChanged += CheckCheckBoxes;
             // 
             // AttackOptions
             // 
+            AttackOptions.CheckOnClick = true;
             AttackOptions.FormattingEnabled = true;
             AttackOptions.Items.AddRange(new object[] { "Melee", "Ranged Attack" });
             AttackOptions.Location = new Point(12, 71);
             AttackOptions.Name = "AttackOptions";
             AttackOptions.Size = new Size(118, 40);
             AttackOptions.TabIndex = 42;
+            AttackOptions.SelectedIndexChanged += CheckCheckBoxes;
             // 
             // Elements
             // 
+            Elements.CheckOnClick = true;
             Elements.ColumnWidth = 60;
             Elements.FormattingEnabled = true;
             Elements.Items.AddRange(new object[] { "Fire", "Ice", "Wind", "Earth", "Light", "Dark", "Any" });
@@ -555,15 +564,18 @@ namespace GHCardsApp
             Elements.Name = "Elements";
             Elements.Size = new Size(125, 76);
             Elements.TabIndex = 43;
+            Elements.SelectedIndexChanged += CheckCheckBoxes;
             // 
             // ForcedMovement
             // 
+            ForcedMovement.CheckOnClick = true;
             ForcedMovement.FormattingEnabled = true;
             ForcedMovement.Items.AddRange(new object[] { "Push", "Pull", "Grant Movement", "Any" });
             ForcedMovement.Location = new Point(12, 344);
             ForcedMovement.Name = "ForcedMovement";
             ForcedMovement.Size = new Size(125, 76);
             ForcedMovement.TabIndex = 44;
+            ForcedMovement.SelectedIndexChanged += CheckCheckBoxes;
             // 
             // Form1
             // 
@@ -620,9 +632,8 @@ namespace GHCardsApp
         private void ClearControls()
         {
             var controlsToKeep = new HashSet<Control>
-    {
-        button1, textBox1, trackBar1, trackBarText
-    };
+            {button1, textBox1, trackBar1, trackBarText};
+
 
             controlsToKeep.UnionWith(Controls.OfType<RadioButton>().Where(radioButton => radioButton.Name.StartsWith("radioButton")));
 
