@@ -15,8 +15,7 @@ namespace GHCardsApp
     public partial class Form1 : Form
     {
         // Initializing variables
-        private string connectionString = @"Initial Catalog=""Gloomhaven Cards"";Integrated Security=True;";
-        private string filePath = @"C:\Users\Kyle\source\repos\GHCardsApp\SQL_Password.txt";
+        private string connectionString = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=""Gloomhaven Cards"";Integrated Security=True;";
         private string sql = "SELECT CardPicture FROM Gloomhaven_Cards";
         private DataSet ds = new DataSet();
         private Byte[] byteBLOBData = new Byte[0];
@@ -35,15 +34,7 @@ namespace GHCardsApp
         {
             InitializeComponent();
             //Testing----------------------------
-            using (StreamReader sr = new StreamReader(filePath))
-            {
-                string line;
-                if ((line = sr.ReadLine()) != null)
-                { 
-                    connectionString = line + connectionString; 
-                }
 
-            }
 
             string[] options = { "=", ">", "<" };
             comboBox1.Items.AddRange(options);
@@ -53,7 +44,7 @@ namespace GHCardsApp
             comboBox1.SelectedIndex = 0;
             comboBox2.SelectedIndex = 0;
             comboBox3.SelectedIndex = 0;
-            comboBox4.SelectedIndex = 0; 
+            comboBox4.SelectedIndex = 0;
             //Testing----------------------------
             searchBar();
             ClassSwitch(selectedOption);
@@ -290,7 +281,7 @@ namespace GHCardsApp
                 }
             }
         }
-        
+
         //Checks checked list boxes for any selected options and adds them to the sql query
         private void addCheckedListBoxOptions()
         {
@@ -310,5 +301,9 @@ namespace GHCardsApp
             }
         }
 
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
