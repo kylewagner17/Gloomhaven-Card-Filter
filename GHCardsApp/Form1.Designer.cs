@@ -7,6 +7,7 @@ using Button = System.Windows.Forms.Button;
 using CheckBox = System.Windows.Forms.CheckBox;
 using TrackBar = System.Windows.Forms.TrackBar;
 using TextBox = System.Windows.Forms.TextBox;
+using System.Reflection;
 
 namespace GHCardsApp
 {
@@ -78,19 +79,11 @@ namespace GHCardsApp
             AttackOptions = new CheckedListBox();
             Elements = new CheckedListBox();
             ForcedMovement = new CheckedListBox();
-            attackNum = new TextBox();
+            textBox2 = new TextBox();
             rangeNum = new TextBox();
             sufferNum = new TextBox();
             moveNum = new TextBox();
-            panel1 = new Panel();
-            panel2 = new Panel();
-            panel3 = new Panel();
-            panel4 = new Panel();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
-            panel1.SuspendLayout();
-            panel2.SuspendLayout();
-            panel3.SuspendLayout();
-            panel4.SuspendLayout();
             SuspendLayout();
             // 
             // button1
@@ -451,10 +444,11 @@ namespace GHCardsApp
             // checkBox1
             // 
             checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(5, 7);
+            checkBox1.Location = new Point(12, 18);
             checkBox1.Name = "checkBox1";
             checkBox1.Size = new Size(60, 19);
             checkBox1.TabIndex = 24;
+            checkBox1.Tag = "atk";
             checkBox1.Text = "Attack";
             checkBox1.UseVisualStyleBackColor = true;
             checkBox1.CheckedChanged += CheckCheckBoxes;
@@ -462,10 +456,11 @@ namespace GHCardsApp
             // checkBox2
             // 
             checkBox2.AutoSize = true;
-            checkBox2.Location = new Point(7, 7);
+            checkBox2.Location = new Point(15, 194);
             checkBox2.Name = "checkBox2";
             checkBox2.Size = new Size(56, 19);
             checkBox2.TabIndex = 25;
+            checkBox2.Tag = "move";
             checkBox2.Text = "Move";
             checkBox2.UseVisualStyleBackColor = true;
             checkBox2.CheckedChanged += CheckCheckBoxes;
@@ -473,10 +468,11 @@ namespace GHCardsApp
             // checkBox3
             // 
             checkBox3.AutoSize = true;
-            checkBox3.Location = new Point(5, 7);
+            checkBox3.Location = new Point(12, 51);
             checkBox3.Name = "checkBox3";
             checkBox3.Size = new Size(59, 19);
             checkBox3.TabIndex = 26;
+            checkBox3.Tag = "range";
             checkBox3.Text = "Range";
             checkBox3.UseVisualStyleBackColor = true;
             checkBox3.CheckedChanged += CheckCheckBoxes;
@@ -485,39 +481,44 @@ namespace GHCardsApp
             // 
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(71, 3);
+            comboBox1.Location = new Point(78, 14);
             comboBox1.MaxDropDownItems = 3;
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(34, 23);
             comboBox1.TabIndex = 27;
+            comboBox1.Tag = "atk";
             // 
             // comboBox2
             // 
             comboBox2.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(73, 3);
+            comboBox2.Location = new Point(85, 190);
             comboBox2.MaxDropDownItems = 3;
             comboBox2.Name = "comboBox2";
             comboBox2.Size = new Size(34, 23);
             comboBox2.TabIndex = 28;
+            comboBox2.Tag = "move";
+            comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
             // 
             // comboBox3
             // 
             comboBox3.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(71, 3);
+            comboBox3.Location = new Point(78, 47);
             comboBox3.MaxDropDownItems = 3;
             comboBox3.Name = "comboBox3";
             comboBox3.Size = new Size(34, 23);
             comboBox3.TabIndex = 29;
+            comboBox3.Tag = "range";
             // 
             // checkBox4
             // 
             checkBox4.AutoSize = true;
-            checkBox4.Location = new Point(7, 7);
+            checkBox4.Location = new Point(15, 139);
             checkBox4.Name = "checkBox4";
             checkBox4.Size = new Size(57, 19);
             checkBox4.TabIndex = 30;
+            checkBox4.Tag = "suffer";
             checkBox4.Text = "Suffer";
             checkBox4.UseVisualStyleBackColor = true;
             checkBox4.CheckedChanged += CheckCheckBoxes;
@@ -526,16 +527,18 @@ namespace GHCardsApp
             // 
             comboBox4.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox4.FormattingEnabled = true;
-            comboBox4.Location = new Point(73, 3);
+            comboBox4.Location = new Point(85, 137);
             comboBox4.MaxDropDownItems = 3;
             comboBox4.Name = "comboBox4";
             comboBox4.Size = new Size(34, 23);
             comboBox4.TabIndex = 31;
+            comboBox4.Tag = "suffer";
             // 
             // checkBox6
             // 
             checkBox6.AutoSize = true;
-            checkBox6.Location = new Point(12, 165);
+            checkBox6.FlatAppearance.BorderColor = Color.Black;
+            checkBox6.Location = new Point(15, 165);
             checkBox6.Name = "checkBox6";
             checkBox6.Size = new Size(49, 19);
             checkBox6.TabIndex = 33;
@@ -545,28 +548,31 @@ namespace GHCardsApp
             // 
             // MoveOptions
             // 
+            MoveOptions.BorderStyle = BorderStyle.None;
             MoveOptions.CheckOnClick = true;
             MoveOptions.FormattingEnabled = true;
             MoveOptions.Items.AddRange(new object[] { "Jump", "Moved Through", "Teleport" });
             MoveOptions.Location = new Point(12, 227);
             MoveOptions.Name = "MoveOptions";
-            MoveOptions.Size = new Size(118, 58);
+            MoveOptions.Size = new Size(118, 54);
             MoveOptions.TabIndex = 41;
             MoveOptions.SelectedIndexChanged += CheckCheckBoxes;
             // 
             // AttackOptions
             // 
+            AttackOptions.BorderStyle = BorderStyle.None;
             AttackOptions.CheckOnClick = true;
             AttackOptions.FormattingEnabled = true;
             AttackOptions.Items.AddRange(new object[] { "Melee", "Ranged Attack" });
             AttackOptions.Location = new Point(12, 82);
             AttackOptions.Name = "AttackOptions";
-            AttackOptions.Size = new Size(118, 40);
+            AttackOptions.Size = new Size(118, 36);
             AttackOptions.TabIndex = 42;
             AttackOptions.SelectedIndexChanged += CheckCheckBoxes;
             // 
             // Elements
             // 
+            Elements.BorderStyle = BorderStyle.None;
             Elements.CheckOnClick = true;
             Elements.ColumnWidth = 60;
             Elements.FormattingEnabled = true;
@@ -574,93 +580,54 @@ namespace GHCardsApp
             Elements.Location = new Point(12, 291);
             Elements.MultiColumn = true;
             Elements.Name = "Elements";
-            Elements.Size = new Size(125, 76);
+            Elements.Size = new Size(125, 72);
             Elements.TabIndex = 43;
             Elements.SelectedIndexChanged += CheckCheckBoxes;
             // 
             // ForcedMovement
             // 
+            ForcedMovement.BorderStyle = BorderStyle.None;
             ForcedMovement.CheckOnClick = true;
             ForcedMovement.FormattingEnabled = true;
             ForcedMovement.Items.AddRange(new object[] { "Push", "Pull", "Grant Movement", "Any" });
             ForcedMovement.Location = new Point(12, 373);
             ForcedMovement.Name = "ForcedMovement";
-            ForcedMovement.Size = new Size(125, 76);
+            ForcedMovement.Size = new Size(125, 72);
             ForcedMovement.TabIndex = 44;
             ForcedMovement.SelectedIndexChanged += CheckCheckBoxes;
             // 
-            // attackNum
+            // textBox2
             // 
-            attackNum.Location = new Point(111, 3);
-            attackNum.Name = "attackNum";
-            attackNum.Size = new Size(19, 23);
-            attackNum.TabIndex = 45;
+            textBox2.Location = new Point(118, 14);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(19, 23);
+            textBox2.TabIndex = 45;
+            textBox2.Tag = "atk";
+            textBox2.TextChanged += CheckCheckBoxes;
             // 
             // rangeNum
             // 
-            rangeNum.Location = new Point(111, 3);
+            rangeNum.Location = new Point(118, 47);
             rangeNum.Name = "rangeNum";
             rangeNum.Size = new Size(19, 23);
             rangeNum.TabIndex = 46;
+            rangeNum.Tag = "range";
             // 
             // sufferNum
             // 
-            sufferNum.Location = new Point(113, 3);
+            sufferNum.Location = new Point(125, 137);
             sufferNum.Name = "sufferNum";
             sufferNum.Size = new Size(19, 23);
             sufferNum.TabIndex = 47;
+            sufferNum.Tag = "suffer";
             // 
             // moveNum
             // 
-            moveNum.Location = new Point(113, 3);
+            moveNum.Location = new Point(125, 190);
             moveNum.Name = "moveNum";
             moveNum.Size = new Size(19, 23);
             moveNum.TabIndex = 48;
-            // 
-            // panel1
-            // 
-            panel1.Controls.Add(comboBox1);
-            panel1.Controls.Add(checkBox1);
-            panel1.Controls.Add(attackNum);
-            panel1.Location = new Point(12, 4);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(135, 33);
-            panel1.TabIndex = 49;
-            panel1.Paint += panel1_Paint;
-            panel1.Visible = true;
-            // 
-            // panel2
-            // 
-            panel2.Controls.Add(checkBox3);
-            panel2.Controls.Add(comboBox3);
-            panel2.Controls.Add(rangeNum);
-            panel2.Location = new Point(12, 43);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(137, 33);
-            panel2.TabIndex = 50;
-            panel2.Visible = true;
-            // 
-            // panel3
-            // 
-            panel3.Controls.Add(comboBox4);
-            panel3.Controls.Add(checkBox4);
-            panel3.Controls.Add(sufferNum);
-            panel3.Location = new Point(12, 127);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(135, 32);
-            panel3.TabIndex = 51;
-            panel3.Visible = true;
-            // 
-            // panel4
-            // 
-            panel4.Controls.Add(comboBox2);
-            panel4.Controls.Add(checkBox2);
-            panel4.Controls.Add(moveNum);
-            panel4.Location = new Point(12, 190);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(139, 31);
-            panel4.TabIndex = 52;
-            panel4.Visible = true;
+            moveNum.Tag = "move";
             // 
             // Form1
             // 
@@ -670,10 +637,18 @@ namespace GHCardsApp
             AutoScroll = true;
             BackColor = SystemColors.Window;
             ClientSize = new Size(1121, 657);
-            Controls.Add(panel4);
-            Controls.Add(panel3);
-            Controls.Add(panel2);
-            Controls.Add(panel1);
+            Controls.Add(comboBox2);
+            Controls.Add(checkBox2);
+            Controls.Add(comboBox4);
+            Controls.Add(moveNum);
+            Controls.Add(checkBox3);
+            Controls.Add(checkBox4);
+            Controls.Add(sufferNum);
+            Controls.Add(comboBox3);
+            Controls.Add(comboBox1);
+            Controls.Add(rangeNum);
+            Controls.Add(checkBox1);
+            Controls.Add(textBox2);
             Controls.Add(ForcedMovement);
             Controls.Add(Elements);
             Controls.Add(AttackOptions);
@@ -705,14 +680,6 @@ namespace GHCardsApp
             Name = "Form1";
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)trackBar1).EndInit();
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
-            panel2.ResumeLayout(false);
-            panel2.PerformLayout();
-            panel3.ResumeLayout(false);
-            panel3.PerformLayout();
-            panel4.ResumeLayout(false);
-            panel4.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -721,17 +688,18 @@ namespace GHCardsApp
         private void ClearControls()
         {
             var controlsToKeep = new HashSet<Control>
-            {button1, textBox1, trackBar1, trackBarText};
+            {button1, trackBar1, trackBarText};
 
 
-            controlsToKeep.UnionWith(Controls.OfType<RadioButton>().Where(radioButton => radioButton.Name.StartsWith("radioButton")));
+            controlsToKeep.UnionWith(Controls.OfType<RadioButton>());
 
-            controlsToKeep.UnionWith(Controls.OfType<ComboBox>().Where(comboBox => comboBox.Name.StartsWith("comboBox")));
+            controlsToKeep.UnionWith(Controls.OfType<ComboBox>());
 
-            controlsToKeep.UnionWith(Controls.OfType<CheckBox>().Where(checkBox => checkBox.Name.StartsWith("checkBox")));
+            controlsToKeep.UnionWith(Controls.OfType<CheckBox>());
 
-            controlsToKeep.UnionWith(Controls.OfType<CheckedListBox>().Where(checkedListBox => checkedListBox.Name.StartsWith("")));
+            controlsToKeep.UnionWith(Controls.OfType<CheckedListBox>());
 
+            controlsToKeep.UnionWith(Controls.OfType<TextBox>());
             for (int i = Controls.Count - 1; i >= 0; i--)
             {
                 if (!controlsToKeep.Contains(Controls[i]))
@@ -791,13 +759,9 @@ namespace GHCardsApp
         private CheckedListBox AttackOptions;
         private CheckedListBox Elements;
         private CheckedListBox ForcedMovement;
-        private TextBox attackNum;
+        private TextBox textBox2;
         private TextBox rangeNum;
         private TextBox sufferNum;
         private TextBox moveNum;
-        private Panel panel1;
-        private Panel panel2;
-        private Panel panel3;
-        private Panel panel4;
     }
 }

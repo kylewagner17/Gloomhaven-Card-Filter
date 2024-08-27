@@ -162,7 +162,9 @@ namespace GHCardsApp
 
             trackBarText.Text = "Level: " + trackBar1.Value;
             ClassSwitch(selectedOption);
-            //CheckCheckBoxes();
+            
+            //passing null just so it still displays the correct cards
+            CheckCheckBoxes(null, EventArgs.Empty);
             GeneratePictureBoxes(Query(sql, connectionString));
         }
 
@@ -261,7 +263,23 @@ namespace GHCardsApp
                 {
                     if (checkBox.Checked)
                     {
-                        sql += " AND (TopText LIKE '%" + checkBox.Text + "%' OR BotText LIKE '%" + checkBox.Text + "%')";
+                        if (checkBox.Tag != null)
+                        {
+                            foreach (Control control2 in Controls)
+                            {
+                                if (control2 is TextBox textBox && textBox.Tag == checkBox.Tag)
+                                {
+                                    sql += " AND (TopText LIKE '%" + checkBox.Text + " " + textBox.Text + "%' OR BotText LIKE '%" + checkBox.Text + " " + textBox.Text + "%')";
+                                }
+                            }
+                        }
+
+                        else
+                        {
+                            sql += " AND (TopText LIKE '%" + checkBox.Text + "%' OR BotText LIKE '%" + checkBox.Text + "%')";
+                        }
+                        
+
                     }
                 }
             }
@@ -301,9 +319,13 @@ namespace GHCardsApp
             }
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
 
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
         }
+
+        
+
+        
     }
 }
