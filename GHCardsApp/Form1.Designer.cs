@@ -69,11 +69,7 @@ namespace GHCardsApp
             checkBox1 = new CheckBox();
             checkBox2 = new CheckBox();
             checkBox3 = new CheckBox();
-            comboBox1 = new ComboBox();
-            comboBox2 = new ComboBox();
-            comboBox3 = new ComboBox();
             checkBox4 = new CheckBox();
-            comboBox4 = new ComboBox();
             checkBox6 = new CheckBox();
             MoveOptions = new CheckedListBox();
             AttackOptions = new CheckedListBox();
@@ -83,6 +79,10 @@ namespace GHCardsApp
             rangeNum = new TextBox();
             sufferNum = new TextBox();
             moveNum = new TextBox();
+            checkBox5 = new CheckBox();
+            checkedListBox1 = new CheckedListBox();
+            radioButton20 = new RadioButton();
+            radioButton21 = new RadioButton();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             SuspendLayout();
             // 
@@ -456,7 +456,7 @@ namespace GHCardsApp
             // checkBox2
             // 
             checkBox2.AutoSize = true;
-            checkBox2.Location = new Point(15, 194);
+            checkBox2.Location = new Point(12, 194);
             checkBox2.Name = "checkBox2";
             checkBox2.Size = new Size(56, 19);
             checkBox2.TabIndex = 25;
@@ -468,7 +468,7 @@ namespace GHCardsApp
             // checkBox3
             // 
             checkBox3.AutoSize = true;
-            checkBox3.Location = new Point(12, 51);
+            checkBox3.Location = new Point(12, 43);
             checkBox3.Name = "checkBox3";
             checkBox3.Size = new Size(59, 19);
             checkBox3.TabIndex = 26;
@@ -477,44 +477,10 @@ namespace GHCardsApp
             checkBox3.UseVisualStyleBackColor = true;
             checkBox3.CheckedChanged += CheckCheckBoxes;
             // 
-            // comboBox1
-            // 
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(78, 14);
-            comboBox1.MaxDropDownItems = 3;
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(34, 23);
-            comboBox1.TabIndex = 27;
-            comboBox1.Tag = "atk";
-            // 
-            // comboBox2
-            // 
-            comboBox2.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(85, 190);
-            comboBox2.MaxDropDownItems = 3;
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(34, 23);
-            comboBox2.TabIndex = 28;
-            comboBox2.Tag = "move";
-            comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
-            // 
-            // comboBox3
-            // 
-            comboBox3.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(78, 47);
-            comboBox3.MaxDropDownItems = 3;
-            comboBox3.Name = "comboBox3";
-            comboBox3.Size = new Size(34, 23);
-            comboBox3.TabIndex = 29;
-            comboBox3.Tag = "range";
-            // 
             // checkBox4
             // 
             checkBox4.AutoSize = true;
-            checkBox4.Location = new Point(15, 139);
+            checkBox4.Location = new Point(12, 68);
             checkBox4.Name = "checkBox4";
             checkBox4.Size = new Size(57, 19);
             checkBox4.TabIndex = 30;
@@ -523,22 +489,11 @@ namespace GHCardsApp
             checkBox4.UseVisualStyleBackColor = true;
             checkBox4.CheckedChanged += CheckCheckBoxes;
             // 
-            // comboBox4
-            // 
-            comboBox4.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox4.FormattingEnabled = true;
-            comboBox4.Location = new Point(85, 137);
-            comboBox4.MaxDropDownItems = 3;
-            comboBox4.Name = "comboBox4";
-            comboBox4.Size = new Size(34, 23);
-            comboBox4.TabIndex = 31;
-            comboBox4.Tag = "suffer";
-            // 
             // checkBox6
             // 
             checkBox6.AutoSize = true;
             checkBox6.FlatAppearance.BorderColor = Color.Black;
-            checkBox6.Location = new Point(15, 165);
+            checkBox6.Location = new Point(12, 147);
             checkBox6.Name = "checkBox6";
             checkBox6.Size = new Size(49, 19);
             checkBox6.TabIndex = 33;
@@ -564,7 +519,7 @@ namespace GHCardsApp
             AttackOptions.CheckOnClick = true;
             AttackOptions.FormattingEnabled = true;
             AttackOptions.Items.AddRange(new object[] { "Melee", "Ranged Attack" });
-            AttackOptions.Location = new Point(12, 82);
+            AttackOptions.Location = new Point(12, 105);
             AttackOptions.Name = "AttackOptions";
             AttackOptions.Size = new Size(118, 36);
             AttackOptions.TabIndex = 42;
@@ -576,7 +531,7 @@ namespace GHCardsApp
             Elements.CheckOnClick = true;
             Elements.ColumnWidth = 60;
             Elements.FormattingEnabled = true;
-            Elements.Items.AddRange(new object[] { "Fire", "Ice", "Wind", "Earth", "Light", "Dark", "Any" });
+            Elements.Items.AddRange(new object[] { "Fire", "Ice", "Wind", "Earth", "Light", "Dark", "Wild" });
             Elements.Location = new Point(12, 291);
             Elements.MultiColumn = true;
             Elements.Name = "Elements";
@@ -598,7 +553,7 @@ namespace GHCardsApp
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(118, 14);
+            textBox2.Location = new Point(78, 14);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(19, 23);
             textBox2.TabIndex = 45;
@@ -607,27 +562,85 @@ namespace GHCardsApp
             // 
             // rangeNum
             // 
-            rangeNum.Location = new Point(118, 47);
+            rangeNum.Location = new Point(78, 39);
             rangeNum.Name = "rangeNum";
             rangeNum.Size = new Size(19, 23);
             rangeNum.TabIndex = 46;
             rangeNum.Tag = "range";
+            rangeNum.TextChanged += CheckCheckBoxes;
             // 
             // sufferNum
             // 
-            sufferNum.Location = new Point(125, 137);
+            sufferNum.Location = new Point(78, 64);
             sufferNum.Name = "sufferNum";
             sufferNum.Size = new Size(19, 23);
             sufferNum.TabIndex = 47;
             sufferNum.Tag = "suffer";
+            sufferNum.TextChanged += CheckCheckBoxes;
             // 
             // moveNum
             // 
-            moveNum.Location = new Point(125, 190);
+            moveNum.Location = new Point(78, 190);
             moveNum.Name = "moveNum";
             moveNum.Size = new Size(19, 23);
             moveNum.TabIndex = 48;
             moveNum.Tag = "move";
+            // 
+            // checkBox5
+            // 
+            checkBox5.AutoSize = true;
+            checkBox5.FlatAppearance.BorderColor = Color.Black;
+            checkBox5.Location = new Point(12, 169);
+            checkBox5.Name = "checkBox5";
+            checkBox5.Size = new Size(92, 19);
+            checkBox5.TabIndex = 49;
+            checkBox5.Text = "Grant Attack";
+            checkBox5.UseVisualStyleBackColor = true;
+            // 
+            // checkedListBox1
+            // 
+            checkedListBox1.BorderStyle = BorderStyle.None;
+            checkedListBox1.CheckOnClick = true;
+            checkedListBox1.FormattingEnabled = true;
+            checkedListBox1.Items.AddRange(new object[] { "Loot", "XP", "Active", "Round Bonus", "Shield", "Retaliate", "Target", "Recover", "Lost", "Token" });
+            checkedListBox1.Location = new Point(12, 451);
+            checkedListBox1.MultiColumn = true;
+            checkedListBox1.Name = "checkedListBox1";
+            checkedListBox1.Size = new Size(242, 90);
+            checkedListBox1.TabIndex = 50;
+            checkedListBox1.SelectedIndexChanged += CheckCheckBoxes;
+            // 
+            // radioButton20
+            // 
+            radioButton20.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            radioButton20.Appearance = Appearance.Button;
+            radioButton20.BackgroundImage = Properties.Resources.BR;
+            radioButton20.BackgroundImageLayout = ImageLayout.Zoom;
+            radioButton20.Location = new Point(928, 387);
+            radioButton20.Name = "radioButton20";
+            radioButton20.Size = new Size(40, 40);
+            radioButton20.TabIndex = 51;
+            radioButton20.TabStop = true;
+            radioButton20.Tag = CardClass.Brute;
+            radioButton20.TextAlign = ContentAlignment.MiddleCenter;
+            radioButton20.TextImageRelation = TextImageRelation.ImageAboveText;
+            radioButton20.UseVisualStyleBackColor = true;
+            radioButton20.CheckedChanged += swapGame;
+            // 
+            // radioButton21
+            // 
+            radioButton21.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            radioButton21.Appearance = Appearance.Button;
+            radioButton21.BackgroundImage = (Image)resources.GetObject("radioButton21.BackgroundImage");
+            radioButton21.BackgroundImageLayout = ImageLayout.Zoom;
+            radioButton21.Location = new Point(974, 387);
+            radioButton21.Name = "radioButton21";
+            radioButton21.Size = new Size(40, 40);
+            radioButton21.TabIndex = 52;
+            radioButton21.Tag = CardClass.Tinkerer;
+            radioButton21.TextAlign = ContentAlignment.MiddleCenter;
+            radioButton21.TextImageRelation = TextImageRelation.ImageAboveText;
+            radioButton21.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -637,15 +650,15 @@ namespace GHCardsApp
             AutoScroll = true;
             BackColor = SystemColors.Window;
             ClientSize = new Size(1121, 657);
-            Controls.Add(comboBox2);
+            Controls.Add(radioButton21);
+            Controls.Add(radioButton20);
+            Controls.Add(checkedListBox1);
+            Controls.Add(checkBox5);
             Controls.Add(checkBox2);
-            Controls.Add(comboBox4);
             Controls.Add(moveNum);
             Controls.Add(checkBox3);
             Controls.Add(checkBox4);
             Controls.Add(sufferNum);
-            Controls.Add(comboBox3);
-            Controls.Add(comboBox1);
             Controls.Add(rangeNum);
             Controls.Add(checkBox1);
             Controls.Add(textBox2);
@@ -678,7 +691,7 @@ namespace GHCardsApp
             Controls.Add(textBox1);
             Controls.Add(button1);
             Name = "Form1";
-            Text = "Form1";
+            Text = " ";
             ((System.ComponentModel.ISupportInitialize)trackBar1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -747,11 +760,7 @@ namespace GHCardsApp
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox checkBox3;
-        private ComboBox comboBox1;
-        private ComboBox comboBox2;
-        private ComboBox comboBox3;
         private CheckBox checkBox4;
-        private ComboBox comboBox4;
         private CheckBox checkBox6;
         private CheckBox checkBox10;
         private CheckBox checkBox11;
@@ -763,5 +772,9 @@ namespace GHCardsApp
         private TextBox rangeNum;
         private TextBox sufferNum;
         private TextBox moveNum;
+        private CheckBox checkBox5;
+        private CheckedListBox checkedListBox1;
+        private RadioButton radioButton20;
+        private RadioButton radioButton21;
     }
 }

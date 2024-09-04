@@ -9,6 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xaml.Permissions;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
+using CheckBox = System.Windows.Forms.CheckBox;
+using RadioButton = System.Windows.Forms.RadioButton;
 
 namespace GHCardsApp
 {
@@ -33,19 +36,6 @@ namespace GHCardsApp
         public Form1()
         {
             InitializeComponent();
-            //Testing----------------------------
-
-
-            string[] options = { "=", ">", "<" };
-            comboBox1.Items.AddRange(options);
-            comboBox2.Items.AddRange(options);
-            comboBox3.Items.AddRange(options);
-            comboBox4.Items.AddRange(options);
-            comboBox1.SelectedIndex = 0;
-            comboBox2.SelectedIndex = 0;
-            comboBox3.SelectedIndex = 0;
-            comboBox4.SelectedIndex = 0;
-            //Testing----------------------------
             searchBar();
             ClassSwitch(selectedOption);
             GeneratePictureBoxes(Query(sql, connectionString));
@@ -162,7 +152,7 @@ namespace GHCardsApp
 
             trackBarText.Text = "Level: " + trackBar1.Value;
             ClassSwitch(selectedOption);
-            
+
             //passing null just so it still displays the correct cards
             CheckCheckBoxes(null, EventArgs.Empty);
             GeneratePictureBoxes(Query(sql, connectionString));
@@ -276,9 +266,10 @@ namespace GHCardsApp
 
                         else
                         {
+                            
                             sql += " AND (TopText LIKE '%" + checkBox.Text + "%' OR BotText LIKE '%" + checkBox.Text + "%')";
                         }
-                        
+
 
                     }
                 }
@@ -312,20 +303,52 @@ namespace GHCardsApp
                         // If so, loop through all checked items and print results  
                         for (int i = 0; i < checkedListBox.CheckedItems.Count; i++)
                         {
-                            sql += " AND (TopText LIKE '%" + checkedListBox.CheckedItems[i].ToString() + "%' OR BotText LIKE '%" + checkedListBox.CheckedItems[i].ToString() + "%')";
+                            if (checkedListBox.CheckedItems[i] == "Any")
+                            {
+                                sql += " AND (TopText LIKE '%forced%' OR BotText LIKE '%forced%')";
+                            }
+                            else
+                            {
+                                sql += " AND (TopText LIKE '%" + checkedListBox.CheckedItems[i].ToString() + "%' OR BotText LIKE '%" + checkedListBox.CheckedItems[i].ToString() + "%')";
+                            }
                         }
+                        
                     }
                 }
             }
         }
 
-
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        private void swapGame(object sender, EventArgs e)
         {
+            List<Control> savedControls = new List<Control>();
+            List<Control> controlsToRemove = new List<Control>();
+
+            foreach (Control control in this.Controls)
+            {
+                if (control is RadioButton)
+                {
+                    savedControls.Add(control);
+                }
+                
+            }
+
+            foreach (Control control in this.Controls)
+            {
+                if (control is RadioButton)
+                {
+                    if (control.Name != "radioButton20" && control.Name !="radioButton21")
+                    {
+                        controlsToRemove.Add(control);
+                    }
+                }
+            }
+
+            foreach (Control control in controlsToRemove)
+            {
+                this.Controls.Remove(control);
+            }
+                
         }
 
-        
-
-        
     }
 }
