@@ -1,8 +1,10 @@
+using GHCardsApp.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -20,22 +22,37 @@ namespace GHCardsApp
         // Initializing variables
         private string connectionString = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=""Gloomhaven Cards"";Integrated Security=True;";
         private string sql = "SELECT CardPicture FROM Gloomhaven_Cards";
+        private string currentTable;
         private DataSet ds = new DataSet();
         private Byte[] byteBLOBData = new Byte[0];
         private CardClass selectedOption = CardClass.Brute;
+        
         private enum CardClass
         {
             Brute, Tinkerer, Spellweaver, Scoundrel,
             Cragheart, Mindthief, Sunkeeper, Quartermaster,
             Summoner, Nightshroud, Plagueherald, Berserker,
             Soothsinger, Doomstalker, Sawbones, Elementalist,
-            Beast_Tyrant, Diviner, Bladeswarm
+            Beast_Tyrant, Diviner, Bladeswarm, Hatchet, Demolitionist,
+            Voidwarden, RedGuard
         };
 
+        List<Control> gloomControls = new List<Control>();
+        List<Control> jawsControls = new List<Control>();
 
         public Form1()
         {
             InitializeComponent();
+
+            currentTable = "Gloomhaven_Cards";
+            foreach (Control control in this.Controls)
+            {
+                if (control is RadioButton)
+                {
+                    gloomControls.Add(control);
+                }
+
+            }
             searchBar();
             ClassSwitch(selectedOption);
             GeneratePictureBoxes(Query(sql, connectionString));
@@ -45,18 +62,17 @@ namespace GHCardsApp
         private void button1_Click(object sender, EventArgs e)
         {
             searchBar();
-            //testing ----------------------------------------------------------------------------------------------------------
             addCheckedListBoxOptions();
-            //testing -----------------------------------------------------------------------------------------------------------
             ClassSwitch(selectedOption);
-            //CheckCheckBoxes();
+            CheckCheckBoxes(null, e);
             GeneratePictureBoxes(Query(sql, connectionString));
+            //MessageBox.Show(sql);
         }
 
         // Saves search input into string to pass to sql query
         private void searchBar()
         {
-            sql = "SELECT CardPicture FROM Gloomhaven_Cards WHERE CardLevel <= " + trackBar1.Value + " ";
+            sql = "SELECT CardPicture FROM " + currentTable + " WHERE CardLevel <= " + trackBar1.Value + " ";
             if (textBox1.Text != "")
             {
                 sql += " AND (CardName LIKE '%" + textBox1.Text + "%')";
@@ -71,7 +87,7 @@ namespace GHCardsApp
             SqlConnection cnn = new SqlConnection(sqlConnectionString);
             SqlCommand command = new SqlCommand(sqlQuery, cnn);
             SqlDataAdapter da = new SqlDataAdapter(command);
-            da.Fill(ds, "Gloomhaven_Cards");
+            da.Fill(ds, currentTable);
             cnn.Close();
             return ds;
         }
@@ -93,7 +109,7 @@ namespace GHCardsApp
             tableLayoutPanel1.RowStyles.Clear();
 
             // Dynamically set number of rows based on card count from query
-            int numRows = (int)Math.Ceiling((double)QueryResult.Tables["Gloomhaven_Cards"].Rows.Count / numCols);
+            int numRows = (int)Math.Ceiling((double)QueryResult.Tables[currentTable].Rows.Count / numCols);
 
             // Define columns and rows with sizes to fit pictureboxes
             for (int i = 0; i < numCols; i++)
@@ -112,9 +128,9 @@ namespace GHCardsApp
             {
                 for (int col = 0; col < numCols; col++)
                 {
-                    if (pictureIndex < QueryResult.Tables["Gloomhaven_Cards"].Rows.Count)
+                    if (pictureIndex < QueryResult.Tables[currentTable].Rows.Count)
                     {
-                        byteBLOBData = (Byte[])(QueryResult.Tables["Gloomhaven_Cards"].Rows[pictureIndex]["CardPicture"]);
+                        byteBLOBData = (Byte[])(QueryResult.Tables[currentTable].Rows[pictureIndex]["CardPicture"]);
 
                         // Memorystream disposal via using block 
                         using (MemoryStream stmBLOBData = new MemoryStream(byteBLOBData))
@@ -220,6 +236,18 @@ namespace GHCardsApp
                 case CardClass.Bladeswarm:
                     sql += " AND ClassName = 'Bladeswarm' ";
                     break;
+                case CardClass.Hatchet:
+                    sql += " AND ClassName = 'Hatchet' ";
+                    break;
+                case CardClass.Demolitionist:
+                    sql += " AND ClassName = 'Demolitionist' ";
+                    break;
+                case CardClass.Voidwarden:
+                    sql += " AND ClassName = 'Voidwarden' ";
+                    break;
+                case CardClass.RedGuard:
+                    sql += " AND ClassName = 'RedGuard' ";
+                    break;
                 default:
                     break;
             }
@@ -320,35 +348,139 @@ namespace GHCardsApp
 
         private void swapGame(object sender, EventArgs e)
         {
-            List<Control> savedControls = new List<Control>();
-            List<Control> controlsToRemove = new List<Control>();
-
-            foreach (Control control in this.Controls)
+            Button button = sender as Button;
+            switch (button.Text)
             {
-                if (control is RadioButton)
-                {
-                    savedControls.Add(control);
-                }
-                
+                case "Gloom":
+                    GloomControls();
+                    break;
+                case "Jaws":
+                    JawsControls();
+                    break;
             }
+            ClassSwitch(selectedOption);
 
-            foreach (Control control in this.Controls)
-            {
-                if (control is RadioButton)
-                {
-                    if (control.Name != "radioButton20" && control.Name !="radioButton21")
-                    {
-                        controlsToRemove.Add(control);
-                    }
-                }
-            }
-
-            foreach (Control control in controlsToRemove)
-            {
-                this.Controls.Remove(control);
-            }
+            //MessageBox.Show(sql);
                 
         }
 
+        private void JawsControls()
+        {
+            foreach (Control control in Controls)
+            {
+                if (control is RadioButton)
+                {
+                    control.Visible = false;
+                }
+            }
+            currentTable = "Jaws_Of_The_Lion";
+
+            radioButton1.BackgroundImage = Properties.Resources.HA;
+            radioButton1.Tag = CardClass.Hatchet;
+            radioButton1.Visible = true;
+            radioButton1.Checked = false;
+            radioButton1.Checked = true;
+            radioButton2.BackgroundImage = Properties.Resources.DE;
+            radioButton2.Tag = CardClass.Demolitionist;
+            radioButton2.Visible = true;
+            radioButton3.BackgroundImage = Properties.Resources.VW;
+            radioButton3.Tag = CardClass.Voidwarden;
+            radioButton3.Visible = true;
+            radioButton4.BackgroundImage = Properties.Resources.RG;
+            radioButton4.Tag = CardClass.RedGuard;
+            radioButton4.Visible = true;
+
+   
+            radioButton5.Visible = false;
+            radioButton6.Visible = false;
+            radioButton7.Visible = false;           
+            radioButton8.Visible = false;
+            radioButton9.Visible = false;
+            radioButton10.Visible = false;
+            radioButton11.Visible = false;
+            radioButton12.Visible = false;
+            radioButton13.Visible = false;
+            radioButton14.Visible = false;
+            radioButton15.Visible = false;
+            radioButton16.Visible = false;
+            radioButton17.Visible = false;
+            radioButton18.Visible = false;
+            radioButton19.Visible = false;
+
+
+
+        }
+        private void GloomControls()
+        {
+            foreach(Control control in Controls)
+            {
+                if (control is RadioButton) 
+                { 
+                    control.Visible = false;
+                }
+            }
+            currentTable = "Gloomhaven_Cards";
+
+            radioButton1.BackgroundImage = Properties.Resources.BR;
+            radioButton1.Tag = CardClass.Brute;
+            radioButton1.Visible = true;
+            radioButton1.Checked = false;
+            radioButton1.Checked = true;
+            radioButton2.BackgroundImage = Properties.Resources.TI;
+            radioButton2.Tag = CardClass.Tinkerer;
+            radioButton2.Visible = true;
+            radioButton3.BackgroundImage = Properties.Resources.SW;
+            radioButton3.Tag = CardClass.Spellweaver;
+            radioButton3.Visible = true;
+            radioButton4.BackgroundImage = Properties.Resources.SC;
+            radioButton4.Tag = CardClass.Scoundrel;
+            radioButton4.Visible = true;
+            radioButton5.BackgroundImage = Properties.Resources.CH;
+            radioButton5.Tag = CardClass.Cragheart;
+            radioButton5.Visible = true;
+            radioButton6.BackgroundImage = Properties.Resources.MT;
+            radioButton6.Tag = CardClass.Mindthief;
+            radioButton6.Visible = true;
+            radioButton7.BackgroundImage = Properties.Resources.SK;
+            radioButton7.Tag = CardClass.Sunkeeper;
+            radioButton7.Visible = true;
+            radioButton8.BackgroundImage = Properties.Resources.QM;
+            radioButton8.Tag = CardClass.Quartermaster;
+            radioButton8.Visible = true;
+            radioButton9.BackgroundImage = Properties.Resources.SU;
+            radioButton9.Tag = CardClass.Summoner;
+            radioButton9.Visible = true;
+            radioButton10.BackgroundImage = Properties.Resources.NS;
+            radioButton10.Tag = CardClass.Nightshroud;
+            radioButton10.Visible = true;
+            radioButton11.BackgroundImage = Properties.Resources.PH;
+            radioButton11.Tag = CardClass.Plagueherald;
+            radioButton11.Visible = true;
+            radioButton12.BackgroundImage = Properties.Resources.BE;
+            radioButton12.Tag = CardClass.Berserker;
+            radioButton12.Visible = true;
+            radioButton13.BackgroundImage = Properties.Resources.SS;
+            radioButton13.Tag = CardClass.Soothsinger;
+            radioButton13.Visible = true;
+            radioButton14.BackgroundImage = Properties.Resources.DS;
+            radioButton14.Tag = CardClass.Doomstalker;
+            radioButton14.Visible = true;
+            radioButton15.BackgroundImage = Properties.Resources.SB;
+            radioButton15.Tag = CardClass.Sawbones;
+            radioButton15.Visible = true;
+            radioButton16.BackgroundImage = Properties.Resources.EL;
+            radioButton16.Tag = CardClass.Elementalist;
+            radioButton16.Visible = true;
+            radioButton17.BackgroundImage = Properties.Resources.BT;
+            radioButton17.Tag = CardClass.Beast_Tyrant;
+            radioButton17.Visible = true;
+            radioButton18.BackgroundImage = Properties.Resources.DR;
+            radioButton18.Tag = CardClass.Diviner;
+            radioButton18.Visible = true;
+            radioButton19.BackgroundImage = Properties.Resources.BS;
+            radioButton19.Tag = CardClass.Bladeswarm;
+            radioButton19.Visible = true;
+
+        }
     }
 }

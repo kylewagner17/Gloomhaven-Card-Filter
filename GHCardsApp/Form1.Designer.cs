@@ -42,7 +42,6 @@ namespace GHCardsApp
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             button1 = new Button();
             textBox1 = new TextBox();
             trackBar1 = new TrackBar();
@@ -81,8 +80,8 @@ namespace GHCardsApp
             moveNum = new TextBox();
             checkBox5 = new CheckBox();
             checkedListBox1 = new CheckedListBox();
-            radioButton20 = new RadioButton();
-            radioButton21 = new RadioButton();
+            button2 = new Button();
+            button3 = new Button();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             SuspendLayout();
             // 
@@ -157,7 +156,7 @@ namespace GHCardsApp
             // 
             radioButton2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             radioButton2.Appearance = Appearance.Button;
-            radioButton2.BackgroundImage = (Image)resources.GetObject("radioButton2.BackgroundImage");
+            radioButton2.BackgroundImage = Properties.Resources.TI;
             radioButton2.BackgroundImageLayout = ImageLayout.Zoom;
             radioButton2.Location = new Point(974, 127);
             radioButton2.Name = "radioButton2";
@@ -610,37 +609,29 @@ namespace GHCardsApp
             checkedListBox1.TabIndex = 50;
             checkedListBox1.SelectedIndexChanged += CheckCheckBoxes;
             // 
-            // radioButton20
+            // button2
             // 
-            radioButton20.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            radioButton20.Appearance = Appearance.Button;
-            radioButton20.BackgroundImage = Properties.Resources.BR;
-            radioButton20.BackgroundImageLayout = ImageLayout.Zoom;
-            radioButton20.Location = new Point(928, 387);
-            radioButton20.Name = "radioButton20";
-            radioButton20.Size = new Size(40, 40);
-            radioButton20.TabIndex = 51;
-            radioButton20.TabStop = true;
-            radioButton20.Tag = CardClass.Brute;
-            radioButton20.TextAlign = ContentAlignment.MiddleCenter;
-            radioButton20.TextImageRelation = TextImageRelation.ImageAboveText;
-            radioButton20.UseVisualStyleBackColor = true;
-            radioButton20.CheckedChanged += swapGame;
+            button2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button2.Location = new Point(928, 357);
+            button2.Name = "button2";
+            button2.Size = new Size(75, 25);
+            button2.TabIndex = 53;
+            button2.Tag = "Gloomhaven_Cards";
+            button2.Text = "Gloom";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += swapGame;
             // 
-            // radioButton21
+            // button3
             // 
-            radioButton21.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            radioButton21.Appearance = Appearance.Button;
-            radioButton21.BackgroundImage = (Image)resources.GetObject("radioButton21.BackgroundImage");
-            radioButton21.BackgroundImageLayout = ImageLayout.Zoom;
-            radioButton21.Location = new Point(974, 387);
-            radioButton21.Name = "radioButton21";
-            radioButton21.Size = new Size(40, 40);
-            radioButton21.TabIndex = 52;
-            radioButton21.Tag = CardClass.Tinkerer;
-            radioButton21.TextAlign = ContentAlignment.MiddleCenter;
-            radioButton21.TextImageRelation = TextImageRelation.ImageAboveText;
-            radioButton21.UseVisualStyleBackColor = true;
+            button3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button3.Location = new Point(1009, 357);
+            button3.Name = "button3";
+            button3.Size = new Size(75, 25);
+            button3.TabIndex = 54;
+            button3.Tag = "Jaws_Of_The_Lion";
+            button3.Text = "Jaws";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += swapGame;
             // 
             // Form1
             // 
@@ -650,8 +641,8 @@ namespace GHCardsApp
             AutoScroll = true;
             BackColor = SystemColors.Window;
             ClientSize = new Size(1121, 657);
-            Controls.Add(radioButton21);
-            Controls.Add(radioButton20);
+            Controls.Add(button3);
+            Controls.Add(button2);
             Controls.Add(checkedListBox1);
             Controls.Add(checkBox5);
             Controls.Add(checkBox2);
@@ -699,10 +690,11 @@ namespace GHCardsApp
 
         // Used to clear Tablelayoutpanel and Pictureboxes
         private void ClearControls()
-        {
+        { /*
             var controlsToKeep = new HashSet<Control>
-            {button1, trackBar1, trackBarText};
+            {trackBar1, trackBarText};
 
+            controlsToKeep.UnionWith(Controls.OfType<Button>());
 
             controlsToKeep.UnionWith(Controls.OfType<RadioButton>());
 
@@ -719,6 +711,12 @@ namespace GHCardsApp
                 {
                     Controls.RemoveAt(i);
                 }
+            }
+            */
+            foreach (Control control in Controls)
+            {
+                if (control is TableLayoutPanel or PictureBox)
+                control.Dispose();
             }
 
         }
@@ -774,7 +772,7 @@ namespace GHCardsApp
         private TextBox moveNum;
         private CheckBox checkBox5;
         private CheckedListBox checkedListBox1;
-        private RadioButton radioButton20;
-        private RadioButton radioButton21;
+        private Button button2;
+        private Button button3;
     }
 }

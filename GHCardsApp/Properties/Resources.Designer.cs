@@ -113,6 +113,16 @@ namespace GHCardsApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap DE {
+            get {
+                object obj = ResourceManager.GetObject("DE", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap DR {
             get {
                 object obj = ResourceManager.GetObject("DR", resourceCulture);
@@ -136,6 +146,16 @@ namespace GHCardsApp.Properties {
         internal static System.Drawing.Bitmap EL {
             get {
                 object obj = ResourceManager.GetObject("EL", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap HA {
+            get {
+                object obj = ResourceManager.GetObject("HA", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -176,6 +196,16 @@ namespace GHCardsApp.Properties {
         internal static System.Drawing.Bitmap QM {
             get {
                 object obj = ResourceManager.GetObject("QM", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RG {
+            get {
+                object obj = ResourceManager.GetObject("RG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -246,6 +276,16 @@ namespace GHCardsApp.Properties {
         internal static System.Drawing.Bitmap TI {
             get {
                 object obj = ResourceManager.GetObject("TI", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap VW {
+            get {
+                object obj = ResourceManager.GetObject("VW", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
