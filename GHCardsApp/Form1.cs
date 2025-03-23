@@ -34,27 +34,39 @@ namespace GHCardsApp
             Summoner, Nightshroud, Plagueherald, Berserker,
             Soothsinger, Doomstalker, Sawbones, Elementalist,
             Beast_Tyrant, Diviner, Bladeswarm, Hatchet, Demolitionist,
-            Voidwarden, RedGuard
+            Voidwarden, RedGuard, Blinkblade, BannerSpear, Boneshaper, 
+            Drifter, Deathwalker, Geminate, CrashingTide, Deepwraith,
+            FrozenFist, HIVE, Infuser, MetalMosaic, PainConduit,
+            Pyroclast, Snowdancer, Shattersong, Trapper, Brightspark,
+            Bombard, Chainguard, Chieftain, FireKnight, Hollowpact,
+            Hierophant, Luminary, Mirefoot, SpiritCaller, Starslinger,
+            AmberAegis, Artificer, Ruinmaw, Incarnate, Rimehearth,
+            Shardrender, Tempest, Thornreaper
         };
 
         List<Control> gloomControls = new List<Control>();
         List<Control> jawsControls = new List<Control>();
+        //List<Control> frostControls = new List<Control>();
+        //List<Control> scalesControls = new List<Control>();
+        //List<Control> ashesControls = new List<Control>();
 
         public Form1()
         {
             InitializeComponent();
 
-            currentTable = "Gloomhaven_Cards";
-            foreach (Control control in this.Controls)
-            {
-                if (control is RadioButton)
-                {
-                    gloomControls.Add(control);
-                }
+            //currentTable = "Gloomhaven_Cards";
+            currentTable = "Frosthaven";
+            sql = "SELECT CardPicture FROM Frosthaven";
+            //foreach (Control control in this.Controls)
+            //{
+              //  if (control is RadioButton)
+               // {
+                //    gloomControls.Add(control);
+               // }
 
-            }
-            searchBar();
-            ClassSwitch(selectedOption);
+            //}
+            //searchBar();
+            //ClassSwitch(selectedOption);
             GeneratePictureBoxes(Query(sql, connectionString));
         }
 
@@ -248,6 +260,114 @@ namespace GHCardsApp
                 case CardClass.RedGuard:
                     sql += " AND ClassName = 'RedGuard' ";
                     break;
+                case CardClass.Blinkblade:
+                    sql += " AND ClassName = 'Blinkblade' ";
+                    break;
+                case CardClass.BannerSpear:
+                    sql += " AND ClassName = 'BannerSpear' ";
+                    break;
+                case CardClass.Boneshaper:
+                    sql += " AND ClassName = 'Boneshaper' ";
+                    break;
+                case CardClass.Drifter:
+                    sql += " AND ClassName = 'Drifter' ";
+                    break;
+                case CardClass.Deathwalker:
+                    sql += " AND ClassName = 'Deathwalker' ";
+                    break;
+                case CardClass.Geminate:
+                    sql += " AND ClassName = 'Geminate' ";
+                    break;
+                case CardClass.CrashingTide:
+                    sql += " AND ClassName = 'CrashingTide' ";
+                    break;
+                case CardClass.Deepwraith:
+                    sql += " AND ClassName = 'Deepwraith' ";
+                    break;
+                case CardClass.FrozenFist:
+                    sql += " AND ClassName = 'FrozenFist' ";
+                    break;
+                case CardClass.HIVE:
+                    sql += " AND ClassName = 'HIVE' ";
+                    break;
+                case CardClass.Infuser:
+                    sql += " AND ClassName = 'Infuser' ";
+                    break;
+                case CardClass.MetalMosaic:
+                    sql += " AND ClassName = 'MetalMosaic' ";
+                    break;
+                case CardClass.PainConduit:
+                    sql += " AND ClassName = 'PainConduit' ";
+                    break;
+                case CardClass.Pyroclast:
+                    sql += " AND ClassName = 'Pyroclast' ";
+                    break;
+                case CardClass.Snowdancer:
+                    sql += " AND ClassName = 'Snowdancer' ";
+                    break;
+                case CardClass.Shattersong:
+                    sql += " AND ClassName = 'Shattersong' ";
+                    break;
+                case CardClass.Trapper:
+                    sql += " AND ClassName = 'Trapper' ";
+                    break;
+                case CardClass.Brightspark:
+                    sql += " AND ClassName = 'Brightspark' ";
+                    break;
+                case CardClass.Bombard:
+                    sql += " AND ClassName = 'Bombard' ";
+                    break;
+                case CardClass.Chainguard:
+                    sql += " AND ClassName = 'Chainguard' ";
+                    break;
+                case CardClass.Chieftain:
+                    sql += " AND ClassName = 'Chieftain' ";
+                    break;
+                case CardClass.FireKnight:
+                    sql += " AND ClassName = 'FireKnight' ";
+                    break;
+                case CardClass.Hollowpact:
+                    sql += " AND ClassName = 'Hollowpact' ";
+                    break;
+                case CardClass.Hierophant:
+                    sql += " AND ClassName = 'Hierophant' ";
+                    break;
+                case CardClass.Luminary:
+                    sql += " AND ClassName = 'Luminary' ";
+                    break;
+                case CardClass.Mirefoot:
+                    sql += " AND ClassName = 'Mirefoot' ";
+                    break;
+                case CardClass.SpiritCaller:
+                    sql += " AND ClassName = 'SpiritCaller' ";
+                    break;
+                case CardClass.Starslinger:
+                    sql += " AND ClassName = 'Starslinger' ";
+                    break;
+                case CardClass.AmberAegis:
+                    sql += " AND ClassName = 'AmberAegis' ";
+                    break;
+                case CardClass.Artificer:
+                    sql += " AND ClassName = 'Artificer' ";
+                    break;
+                case CardClass.Ruinmaw:
+                    sql += " AND ClassName = 'Ruinmaw' ";
+                    break;
+                case CardClass.Incarnate:
+                    sql += " AND ClassName = 'Incarnate' ";
+                    break;
+                case CardClass.Rimehearth:
+                    sql += " AND ClassName = 'Rimehearth' ";
+                    break;
+                case CardClass.Shardrender:
+                    sql += " AND ClassName = 'Shardrender' ";
+                    break;
+                case CardClass.Tempest:
+                    sql += " AND ClassName = 'Tempest' ";
+                    break;
+                case CardClass.Thornreaper:
+                    sql += " AND ClassName = 'Thornreaper' ";
+                    break;
                 default:
                     break;
             }
@@ -357,11 +477,32 @@ namespace GHCardsApp
                 case "Jaws":
                     JawsControls();
                     break;
+                /*
+                case "Frost";
+                    FrostControls();
+                    break;
+                case "Scales";
+                    ScalesControls();
+                    break;
+                case "Ashes";
+                    AshesControls();
+                    break;
+                */
             }
             ClassSwitch(selectedOption);
 
             //MessageBox.Show(sql);
                 
+        }
+
+        private void FrostControls()
+        { 
+        }
+        private void ScalesControls()
+        {
+        }
+        private void AshesControls()
+        {
         }
 
         private void JawsControls()
